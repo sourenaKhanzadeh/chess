@@ -17,7 +17,8 @@ public:
     void close();
 
     void pollEvent(sf::Event& event);
-
+    sf::RenderWindow& getWindow();
+    
 private:
     sf::RenderWindow window;
 };

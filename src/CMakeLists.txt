@@ -1,5 +1,11 @@
 set(INCLUDES 
     ../include/renderer.hpp
+    ../include/game.hpp
 )
 
-add_library(chesslib renderer.cpp ${INCLUDES})
+set(SOURCES
+    renderer.cpp
+    game.cpp
+)
+
+add_library(chesslib ${SOURCES} ${INCLUDES})

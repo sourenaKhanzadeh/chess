@@ -40,3 +40,8 @@ void Renderer::pollEvent(sf::Event& event)
     window.pollEvent(event);
 }
 
+sf::RenderWindow& Renderer::getWindow()
+{
+    return window;
+}
+

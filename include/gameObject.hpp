@@ -7,7 +7,7 @@ class GameObject
 {
 public:
     GameObject();
-    ~GameObject();
+    virtual ~GameObject() = default;
 
     virtual void update(sf::Time deltaTime) = 0;
     virtual void draw(sf::RenderWindow& window) = 0;

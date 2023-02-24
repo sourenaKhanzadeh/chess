@@ -35,7 +35,7 @@ void Game::processEvents()
     {
         if (event.type == sf::Event::Closed)
         {
-            renderer->getWindow().close();
+            renderer->close();
         }
     }
 }

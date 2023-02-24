@@ -6,10 +6,6 @@ GameObject::GameObject()
     //ctor
 }
 
-GameObject::~GameObject()
-{
-    //dtor
-}
 
 sf::Vector2f GameObject::getPosition()
 {

@@ -2,7 +2,9 @@
 #define GAME_HPP
 
 #include <SFML/Graphics.hpp>
+#include <vector>
 #include "renderer.hpp"
+#include "gameObject.hpp"
 
 #define TIME_PER_FRAME sf::seconds(1.f/60.f)
 class Game
@@ -13,6 +15,8 @@ public:
 
     void run();
 
+    void addGameObject(GameObject* gameObject);
+    std::vector<GameObject*> getGameObjects();
 private:
     void processEvents();
     void update(sf::Time deltaTime);

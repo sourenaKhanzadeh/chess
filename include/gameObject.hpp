@@ -30,13 +30,21 @@ public:
     sf::Color getColor();
     void setColor(sf::Color color);
 
+    friend std::ostream& operator<<(std::ostream& os, const GameObject& obj)
+    {
+        os << "Position: " << obj.position.x << ", " << obj.position.y << std::endl;
+        os << "Color: " << obj.color.r << ", " << obj.color.g << ", " << obj.color.b << ", " << obj.color.a << std::endl;
+        return os;
+    }
 private:
-    sf::Vector2f position;
     sf::Vector2f velocity;
     sf::Vector2f acceleration;
     float mass;
     float radius;
+protected:
+    sf::Vector2f position;
     sf::Color color;
+
 };
 
 

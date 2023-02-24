@@ -53,11 +53,20 @@ void Game::render()
 {
     renderer->clear(sf::Color::White);
     // Draw stuff here
-    renderer->display();
-
     for(GameObject* gameObject : renderer->getGameObjects())
     {
         gameObject->draw(renderer->getWindow());
     }
+    renderer->display();
+
 }
 
+void Game::addGameObject(GameObject* gameObject)
+{
+    renderer->addGameObject(gameObject);
+}
+
+std::vector<GameObject*> Game::getGameObjects()
+{
+    return renderer->getGameObjects();
+}

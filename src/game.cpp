@@ -43,12 +43,21 @@ void Game::processEvents()
 void Game::update(sf::Time deltaTime)
 {
     // Update game logic here
+    for (GameObject* gameObject : renderer->getGameObjects())
+    {
+        gameObject->update(deltaTime);
+    }
 }
 
 void Game::render()
 {
-    renderer->clear(sf::Color::Black);
+    renderer->clear(sf::Color::White);
     // Draw stuff here
     renderer->display();
+
+    for(GameObject* gameObject : renderer->getGameObjects())
+    {
+        gameObject->draw(renderer->getWindow());
+    }
 }
 

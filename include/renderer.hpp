@@ -2,6 +2,8 @@
 #define RENDERER_HPP
 
 #include <SFML/Graphics.hpp>
+#include <vector>
+#include "gameObject.hpp"
 
 class Renderer
 {
@@ -18,9 +20,15 @@ public:
 
     void pollEvent(sf::Event& event);
     sf::RenderWindow& getWindow();
+
+    void addGameObject(GameObject* gameObject);
+    std::vector<GameObject*> getGameObjects();
     
 private:
     sf::RenderWindow window;
+
+protected:
+    std::vector<GameObject*> gameObjects;
 };
 
 #endif

@@ -1,11 +1,5 @@
-set(INCLUDES 
-    ../include/renderer.hpp
-    ../include/game.hpp
-)
+file(GLOB SOURCES *.cpp)
+file(GLOB INCLUDES ../include/*.hpp)
 
-set(SOURCES
-    renderer.cpp
-    game.cpp
-)
 
 add_library(chesslib ${SOURCES} ${INCLUDES})

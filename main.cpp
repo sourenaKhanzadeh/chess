@@ -5,7 +5,7 @@
 int main()
 {
     Game game;
-    game.addGameObject(new Board(sf::Vector2f(0, 0), sf::Vector2f(800, 800), sf::Color::Red));
+    game.addGameObject(new Board(sf::Vector2f(0, 0), sf::Vector2f(800, 800), sf::Color::Red, false));
     game.run();
 
 

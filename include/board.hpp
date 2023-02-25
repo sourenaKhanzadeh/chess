@@ -11,7 +11,7 @@
 class Board : public BoardObject
 {
 public:
-    Board(sf::Vector2f position, sf::Vector2f size, sf::Color color);
+    Board(sf::Vector2f position, sf::Vector2f size, sf::Color color, bool playAsWhite);
     ~Board();
     void draw(sf::RenderWindow& window);
     void update(sf::Time deltaTime);
@@ -22,6 +22,8 @@ public:
     sf::Vector2f getSize();
     sf::Color getColor();
 private:
+    bool playAsWhite;
+    void setupBoard(int i, int j);
 protected:
     std::vector<std::vector<Cell*>> cells;
 };

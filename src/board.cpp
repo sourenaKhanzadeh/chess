@@ -1,7 +1,8 @@
 #include "../include/board.hpp"
 
-Board::Board(sf::Vector2f position, sf::Vector2f size, sf::Color color): BoardObject(position, size, color)
+Board::Board(sf::Vector2f position, sf::Vector2f size, sf::Color color, bool playAsWhite): BoardObject(position, size, color)
 {
+    this->playAsWhite = playAsWhite;
     for (int i = 0; i < 8; i++)
     {
         std::vector<Cell*> row;
@@ -74,14 +75,9 @@ void Board::draw(sf::RenderWindow& window)
             }
             else
             {
-                cells[i][j]->setColor(sf::Color::Black);
+                cells[i][j]->setColor(sf::Color(246, 240, 188));
             }
-            //add white pawn to the first row
-            if (j == 1)
-            {
-                cells[i][j]->setPiece(new Pawn(sf::Vector2f(position.x + i * size.x / 8, position.y + j * size.y / 8), 
-                sf::Vector2f(size.x / 8, size.y / 8), sf::Color::White, true));
-            }
+            setupBoard(i, j);
             cells[i][j]->setPosition(sf::Vector2f(position.x + i * size.x / 8, position.y + j * size.y / 8));
             cells[i][j]->setSize(sf::Vector2f(size.x / 8, size.y / 8));
             cells[i][j]->draw(window);
@@ -91,4 +87,31 @@ void Board::draw(sf::RenderWindow& window)
 
 void Board::update(sf::Time deltaTime)
 {
+}
+
+void Board::setupBoard(int i, int j)
+{
+    //add white pawn to the first row
+    if(playAsWhite){
+
+        if (j == 1)
+        {
+            cells[i][j]->setPiece(new Pawn(sf::Vector2f(position.x + i * size.x / 8, position.y + j * size.y / 8), 
+            sf::Vector2f(size.x / 8, size.y / 8), sf::Color::White, true));
+        }
+        if (j == 6){
+            cells[i][j]->setPiece(new Pawn(sf::Vector2f(position.x + i * size.x / 8, position.y + j * size.y / 8), 
+            sf::Vector2f(size.x / 8, size.y / 8), sf::Color::Black, false));
+        }
+    }else{
+        if (j == 6)
+        {
+            cells[i][j]->setPiece(new Pawn(sf::Vector2f(position.x + i * size.x / 8, position.y + j * size.y / 8), 
+            sf::Vector2f(size.x / 8, size.y / 8), sf::Color::White, true));
+        }
+        if (j == 1){
+            cells[i][j]->setPiece(new Pawn(sf::Vector2f(position.x + i * size.x / 8, position.y + j * size.y / 8), 
+            sf::Vector2f(size.x / 8, size.y / 8), sf::Color::Black, false));
+        }
+    }
 }

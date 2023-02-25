@@ -3,6 +3,7 @@
 
 #include <SFML/Graphics.hpp>
 #include <vector>
+#include <string>
 #include <iostream>
 #include "boardObject.hpp"
 #include "cell.hpp"
@@ -23,9 +24,19 @@ public:
     sf::Color getColor();
 private:
     bool playAsWhite;
-    void setupBoard(int i, int j);
+    void setupBoard();
 protected:
     std::vector<std::vector<Cell*>> cells;
+    std::string **board = new std::string*[8]{
+        new std::string[8]{"RW", "KW", "BW", "QW", "KW", "BW", "KW", "RW"},
+        new std::string[8]{"PW", "PW", "PW", "PW", "PW", "PW", "PW", "PW"},
+        new std::string[8]{"", "", "", "", "", "", "", ""},
+        new std::string[8]{"", "", "", "", "", "", "", ""},
+        new std::string[8]{"", "", "", "", "", "", "", ""},
+        new std::string[8]{"", "", "", "", "", "", "", ""},
+        new std::string[8]{"PB", "PB", "PB", "PB", "PB", "PB", "PB", "PB"},
+        new std::string[8]{"RB", "KB", "BB", "QB", "KB", "BB", "KB", "RB"}
+    };
 };
 
 

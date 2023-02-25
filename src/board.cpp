@@ -12,6 +12,29 @@ Board::Board(sf::Vector2f position, sf::Vector2f size, sf::Color color, bool pla
         }
         cells.push_back(row);
     }
+    // rotate 'board' 90 degrees to make it easier to read
+    for (int i = 0; i < 8; i++)
+    {
+        for (int j = 0; j < i; j++)
+        {
+            std::string temp = board[i][j];
+            board[i][j] = board[j][i];
+            board[j][i] = temp;
+        }
+    }
+    if (playAsWhite)
+    {
+        // rotate 'board' 180 degrees
+        for (int i = 0; i < 8; i++)
+        {
+            for (int j = 0; j < 4; j++)
+            {
+                std::string temp = board[i][j];
+                board[i][j] = board[i][7 - j];
+                board[i][7 - j] = temp;
+            }
+        }
+    }
 }
 
 Board::~Board()
@@ -23,6 +46,11 @@ Board::~Board()
             delete cells[i][j];
         }
     }
+    for (int i = 0; i < 8; i++)
+    {
+        delete[] board[i];
+    }
+    delete[] board;
 }
 
 void Board::setPosition(sf::Vector2f position)
@@ -77,41 +105,41 @@ void Board::draw(sf::RenderWindow& window)
             {
                 cells[i][j]->setColor(sf::Color(246, 240, 188));
             }
-            setupBoard(i, j);
             cells[i][j]->setPosition(sf::Vector2f(position.x + i * size.x / 8, position.y + j * size.y / 8));
             cells[i][j]->setSize(sf::Vector2f(size.x / 8, size.y / 8));
             cells[i][j]->draw(window);
         }
     }
+    setupBoard();
+    
 }
 
 void Board::update(sf::Time deltaTime)
 {
 }
 
-void Board::setupBoard(int i, int j)
-{
-    //add white pawn to the first row
-    if(playAsWhite){
 
-        if (j == 1)
+void Board::setupBoard()
+{
+    for (int i = 0; i < 8; i++)
+    {
+        for (int j = 0; j < 8; j++)
         {
-            cells[i][j]->setPiece(new Pawn(sf::Vector2f(position.x + i * size.x / 8, position.y + j * size.y / 8), 
-            sf::Vector2f(size.x / 8, size.y / 8), sf::Color::White, true));
-        }
-        if (j == 6){
-            cells[i][j]->setPiece(new Pawn(sf::Vector2f(position.x + i * size.x / 8, position.y + j * size.y / 8), 
-            sf::Vector2f(size.x / 8, size.y / 8), sf::Color::Black, false));
-        }
-    }else{
-        if (j == 6)
-        {
-            cells[i][j]->setPiece(new Pawn(sf::Vector2f(position.x + i * size.x / 8, position.y + j * size.y / 8), 
-            sf::Vector2f(size.x / 8, size.y / 8), sf::Color::White, true));
-        }
-        if (j == 1){
-            cells[i][j]->setPiece(new Pawn(sf::Vector2f(position.x + i * size.x / 8, position.y + j * size.y / 8), 
-            sf::Vector2f(size.x / 8, size.y / 8), sf::Color::Black, false));
+            if (board[i][j] != "")
+            {
+                Piece* piece;
+                sf::Vector2f pos(position.x + i * size.x / 8, position.y + j * size.y / 8);
+                sf::Vector2f si(size.x / 8, size.y / 8);
+                if (board[i][j] == "PW"){
+                    piece = new Pawn(pos, si, sf::Color::White, true);
+                }else if (board[i][j] == "PB"){
+                    piece = new Pawn(pos, si, sf::Color::Black, false);
+                }else{
+                    // for now 
+                    piece = nullptr;
+                }
+                cells[i][j]->setPiece(piece);
+            }
         }
     }
 }

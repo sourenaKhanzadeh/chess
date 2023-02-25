@@ -3,6 +3,7 @@
 
 #include <SFML/Graphics.hpp>
 #include "boardObject.hpp"
+#include "piece.hpp"
 
 class Cell : public BoardObject
 {
@@ -17,7 +18,11 @@ public:
     sf::Vector2f getPosition();
     sf::Vector2f getSize();
     sf::Color getColor();
+    void setPiece(Piece* piece);
+    Piece* getPiece();
 private:
+protected:
+    Piece* piece= nullptr;
 };
 
 #endif

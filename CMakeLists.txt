@@ -16,7 +16,7 @@ include_directories(/opt/homebrew/Cellar/sfml/2.5.1_2/include)
 add_subdirectory(src)
 
 target_link_libraries(chess 
-PUBLIC
+PRIVATE
 sfml-graphics sfml-audio sfml-window
 chesslib)
 

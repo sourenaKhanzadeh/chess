@@ -6,6 +6,7 @@ Cell::Cell(sf::Vector2f position, sf::Vector2f size, sf::Color color): BoardObje
 
 Cell::~Cell()
 {
+    delete piece;
 }
 
 void Cell::setPosition(sf::Vector2f position)
@@ -48,11 +49,22 @@ void Cell::draw(sf::RenderWindow& window)
     shape.setSize(size);
     shape.setFillColor(color);
     window.draw(shape);
+    if (piece != nullptr)
+    piece->draw(window);
 }
 
 void Cell::update(sf::Time deltaTime)
 {
 }
 
+void Cell::setPiece(Piece* piece)
+{
+    this->piece = piece;
+}
+
+Piece* Cell::getPiece()
+{
+    return piece;
+}
 
 

@@ -3,8 +3,10 @@
 
 #include <SFML/Graphics.hpp>
 #include <vector>
+#include <iostream>
 #include "boardObject.hpp"
 #include "cell.hpp"
+#include "pawn.hpp"
 
 class Board : public BoardObject
 {

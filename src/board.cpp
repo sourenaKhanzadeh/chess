@@ -76,6 +76,12 @@ void Board::draw(sf::RenderWindow& window)
             {
                 cells[i][j]->setColor(sf::Color::Black);
             }
+            //add white pawn to the first row
+            if (j == 1)
+            {
+                cells[i][j]->setPiece(new Pawn(sf::Vector2f(position.x + i * size.x / 8, position.y + j * size.y / 8), 
+                sf::Vector2f(size.x / 8, size.y / 8), sf::Color::White, true));
+            }
             cells[i][j]->setPosition(sf::Vector2f(position.x + i * size.x / 8, position.y + j * size.y / 8));
             cells[i][j]->setSize(sf::Vector2f(size.x / 8, size.y / 8));
             cells[i][j]->draw(window);

@@ -193,6 +193,15 @@ void Board::mouseReleased(sf::Event event, sf::RenderWindow& window)
  for (Piece* piece : pieces)
     {
         piece->setDragging(false);
+        if (piece->isMouseInside(sf::Vector2f(event.mouseButton.x, event.mouseButton.y))){            
+            for (Cell* cell : cells)
+            {
+                if (cell->isMouseInside(sf::Vector2f(event.mouseButton.x, event.mouseButton.y)))
+                {
+                    piece->setPosition(cell->getPosition());
+                }
+            }
+        }
     }
     moving = false;
     

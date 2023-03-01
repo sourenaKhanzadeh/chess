@@ -18,6 +18,7 @@ public:
     void setColor(sf::Color color);
     void mousePressed(sf::Event event, sf::RenderWindow& window);
     void mouseReleased(sf::Event event, sf::RenderWindow& window);
+    bool isMouseInside(sf::Vector2f mousePosition);
     sf::Vector2f getPosition();
     sf::Vector2f getSize();
     sf::Color getColor();

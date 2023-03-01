@@ -185,17 +185,15 @@ void Board::mousePressed(sf::Event event, sf::RenderWindow& window)
                 piece->mousePressed(event, window);
             }
         }
-    }else{
-        moving = false;
-        for (Piece* piece : pieces)
-        {
-            piece->setDragging(false);
-        }
     }
 }
 
 void Board::mouseReleased(sf::Event event, sf::RenderWindow& window)
 {
- 
+ for (Piece* piece : pieces)
+    {
+        piece->setDragging(false);
+    }
+    moving = false;
     
 }

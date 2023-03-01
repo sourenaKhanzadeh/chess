@@ -11,6 +11,7 @@
 #include "rook.hpp"
 #include "knight.hpp"
 #include "bishop.hpp"
+#include "queen.hpp"
 
 class Board : public BoardObject
 {

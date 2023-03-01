@@ -84,12 +84,22 @@ Board::Board(sf::Vector2f position, sf::Vector2f size, sf::Color color, bool pla
                 }
                 if (piece != nullptr)
                 {
+                    if (playAsWhite && pos.y > 400 || !playAsWhite && pos.y < 400){
+                        piece->setMoveDirectionUp(true);
+                    }else{
+                        piece->setMoveDirectionUp(false);
+                    }
+                    piece->setPrevPos(pos);
                     pieces.push_back(piece);
                 }
                 
                 // cells[i * 8 + j]->setPiece(piece);
             }
         }
+    }
+    for (Piece* piece : pieces)
+    {
+        piece->setPieces(pieces);
     }
 
 }
@@ -198,11 +208,16 @@ void Board::mouseReleased(sf::Event event, sf::RenderWindow& window)
             {
                 if (cell->isMouseInside(sf::Vector2f(event.mouseButton.x, event.mouseButton.y)))
                 {
-                    piece->setPosition(cell->getPosition());
+                    piece->move(cell->getPosition());
                 }
             }
         }
     }
     moving = false;
     
+}
+
+std::vector<Cell*> Board::getCells()
+{
+    return cells;
 }

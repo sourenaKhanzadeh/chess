@@ -3,7 +3,11 @@
 
 #include <SFML/Graphics.hpp>
 #include <string>
+#include <vector>
+#include <math.h>
 #include "boardObject.hpp"
+#include "cell.hpp"
+
 
 class Piece : public BoardObject
 {
@@ -22,6 +26,7 @@ public:
     void mouseReleased(sf::Event event, sf::RenderWindow& window);
     bool isMouseInside(sf::Vector2f mousePosition);
     void setDragging(bool dragging);
+    void setPrevPos(sf::Vector2f prevPos);
 
     virtual void move(sf::Vector2f position) = 0;
     virtual void move(sf::Vector2f position, sf::Time deltaTime) = 0;
@@ -31,6 +36,11 @@ public:
     virtual sf::Sprite getSprite() = 0;
     virtual void setTexturePath(std::string texturePath) = 0;
     virtual std::string getTexturePath() = 0;
+
+    void setPieces(std::vector<Piece*> pieces){this->pieces = pieces;}
+    void setWhite(bool isWhite){this->isWhite = isWhite;}
+    void setMoveDirectionUp(bool isMoveDirectionUp){this->isMoveDirectionUp = isMoveDirectionUp;}
+    bool getWhite(){return isWhite;}
 private:
 protected:
     sf::Texture texture;
@@ -38,7 +48,10 @@ protected:
     std::string texturePath;
     bool isWhite;
     bool dragging = false;
-
+    sf::Vector2f prevPos;
+    std::vector<sf::Vector2f> possibleMoves;
+    bool isMoveDirectionUp;
+    std::vector<Piece*> pieces;
 };
 
 #endif

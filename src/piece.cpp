@@ -87,3 +87,8 @@ void Piece::setDragging(bool dragging)
 {
     this->dragging = dragging;
 }
+
+void Piece::setPrevPos(sf::Vector2f prevPosition)
+{
+    this->prevPos = prevPosition;
+}

@@ -6,6 +6,7 @@
 #include <string>
 #include <iostream>
 #include "boardObject.hpp"
+#include "piece.hpp"
 #include "cell.hpp"
 #include "pawn.hpp"
 #include "rook.hpp"
@@ -29,6 +30,7 @@ public:
     sf::Vector2f getPosition();
     sf::Vector2f getSize();
     sf::Color getColor();
+    std::vector<Cell*> getCells();
 private:
     bool playAsWhite;
     bool moving = false;

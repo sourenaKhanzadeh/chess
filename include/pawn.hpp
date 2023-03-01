@@ -19,6 +19,7 @@ public:
     void setTexturePath(std::string texturePath);
     std::string getTexturePath();
 private:
+    
 };
 
 #endif

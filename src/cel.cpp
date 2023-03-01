@@ -67,4 +67,16 @@ Piece* Cell::getPiece()
     return piece;
 }
 
+void Cell::mousePressed(sf::Event event)
+{
+    // get the positions of the piece and set it to the event position
+    if (piece != nullptr)
+    {
+        piece->setPosition(sf::Vector2f(event.mouseButton.x, event.mouseButton.y));
+    }
+}
+
+void Cell::mouseReleased(sf::Event event)
+{
+}
 

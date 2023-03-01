@@ -51,3 +51,11 @@ void Piece::update(sf::Time deltaTime)
 {
 }
 
+
+void Piece::mousePressed(sf::Event event)
+{
+}
+
+void Piece::mouseReleased(sf::Event event)
+{
+}

@@ -18,6 +18,8 @@ public:
     sf::Vector2f getPosition();
     sf::Vector2f getSize();
     sf::Color getColor();
+    void mousePressed(sf::Event event);
+    void mouseReleased(sf::Event event);
 
     virtual void move(sf::Vector2f position) = 0;
     virtual void move(sf::Vector2f position, sf::Time deltaTime) = 0;

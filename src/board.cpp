@@ -140,6 +140,11 @@ void Board::setupBoard()
                 }else if(board[i][j] == "RB"){
                     piece = new Rook(pos, si, sf::Color::Black, false);
                 }
+                else if(board[i][j] == "NW"){
+                    piece = new Knight(pos, si, sf::Color::White, true);
+                }else if(board[i][j] == "NB"){
+                    piece = new Knight(pos, si, sf::Color::Black, false);
+                }
                 else{
                     // for now 
                     piece = nullptr;

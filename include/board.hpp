@@ -9,6 +9,7 @@
 #include "cell.hpp"
 #include "pawn.hpp"
 #include "rook.hpp"
+#include "knight.hpp"
 
 class Board : public BoardObject
 {
@@ -29,14 +30,14 @@ private:
 protected:
     std::vector<std::vector<Cell*>> cells;
     std::string **board = new std::string*[8]{
-        new std::string[8]{"RW", "KW", "BW", "QW", "KW", "BW", "KW", "RW"},
+        new std::string[8]{"RW", "NW", "BW", "QW", "KW", "BW", "NW", "RW"},
         new std::string[8]{"PW", "PW", "PW", "PW", "PW", "PW", "PW", "PW"},
         new std::string[8]{"", "", "", "", "", "", "", ""},
         new std::string[8]{"", "", "", "", "", "", "", ""},
         new std::string[8]{"", "", "", "", "", "", "", ""},
         new std::string[8]{"", "", "", "", "", "", "", ""},
         new std::string[8]{"PB", "PB", "PB", "PB", "PB", "PB", "PB", "PB"},
-        new std::string[8]{"RB", "KB", "BB", "QB", "KB", "BB", "KB", "RB"}
+        new std::string[8]{"RB", "NB", "BB", "QB", "KB", "BB", "NB", "RB"}
     };
 };
 

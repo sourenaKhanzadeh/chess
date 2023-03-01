@@ -10,7 +10,6 @@ class King : public Piece
 public:
     King(sf::Vector2f position, sf::Vector2f size, sf::Color color, bool isWhite);
     ~King();
-    void draw(sf::RenderWindow& window);
     void move(sf::Vector2f position);
     void move(sf::Vector2f position, sf::Time deltaTime);
     void setTexture(sf::Texture texture);

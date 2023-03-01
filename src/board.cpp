@@ -82,7 +82,12 @@ Board::Board(sf::Vector2f position, sf::Vector2f size, sf::Color color, bool pla
                     // for now 
                     piece = nullptr;
                 }
-                cells[i * 8 + j]->setPiece(piece);
+                if (piece != nullptr)
+                {
+                    pieces.push_back(piece);
+                }
+                
+                // cells[i * 8 + j]->setPiece(piece);
             }
         }
     }
@@ -94,6 +99,9 @@ Board::~Board()
     for (int i = 0; i < 8*2; i++)
     {
         delete cells[i];
+    }
+    for(Piece* piece : pieces){
+        delete piece;
     }
     for (int i = 0; i < 8; i++)
     {
@@ -144,10 +152,10 @@ void Board::draw(sf::RenderWindow& window)
     for (Cell* cell : cells)
     {
         cell->draw(window);
-        if (cell->getPiece() != nullptr)
-        {
-            cell->getPiece()->draw(window);
-        }
+    }
+    for (Piece* piece : pieces)
+    {
+        piece->draw(window);
     }
 }
 
@@ -161,34 +169,27 @@ void Board::mousePressed(sf::Event event, sf::RenderWindow& window)
 {
     if(event.type == sf::Event::MouseButtonPressed){
         moving = true;
-        for (Cell* cell : cells)
+        for (Piece* piece : pieces)
         {
-            // check if the mouse is inside the cell
-            if (cell->getPiece() != nullptr){
-                // drag around the piece if the mouse is touching it
-                if (cell->getPiece()->isMouseInside(sf::Vector2f(event.mouseButton.x, event.mouseButton.y)))
-                {
-                    cell->getPiece()->setDragging(true);
-                    cell->getPiece()->mousePressed(event, window);
-                }
+            // drag around the piece if the mouse is touching it
+            if (piece->isMouseInside(sf::Vector2f(event.mouseButton.x, event.mouseButton.y)))
+            {
+                piece->setDragging(true);
+                piece->mousePressed(event, window);
             }
         }
     }else if(event.type == sf::Event::MouseMoved){
         if (moving){
-            for (Cell* cell : cells)
+            for (Piece* piece : pieces)
             {
-                if (cell->getPiece() != nullptr){
-                    cell->getPiece()->mousePressed(event, window);
-                }
+                piece->mousePressed(event, window);
             }
         }
     }else{
         moving = false;
-        for (Cell* cell : cells)
+        for (Piece* piece : pieces)
         {
-            if (cell->getPiece() != nullptr){
-                cell->getPiece()->setDragging(false);
-            }
+            piece->setDragging(false);
         }
     }
 }

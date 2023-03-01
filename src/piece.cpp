@@ -41,10 +41,13 @@ sf::Color Piece::getColor()
 
 void Piece::draw(sf::RenderWindow& window)
 {
-    shape.setPosition(position);
-    shape.setSize(size);
-    shape.setFillColor(color);
-    window.draw(shape);
+    // shape.setPosition(position);
+    // shape.setSize(size);
+    // shape.setFillColor(color);
+    // window.draw(shape);
+    sprite.setPosition(position);
+    sprite.setScale(size.x / sprite.getTexture()->getSize().x, size.y / sprite.getTexture()->getSize().y);
+    window.draw(sprite);
 }
 
 void Piece::update(sf::Time deltaTime)

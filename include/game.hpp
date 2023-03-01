@@ -1,6 +1,7 @@
 #ifndef GAME_HPP
 #define GAME_HPP
 
+#define FPS 60
 #include <SFML/Graphics.hpp>
 #include <vector>
 #include <iostream>

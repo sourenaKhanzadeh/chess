@@ -34,6 +34,7 @@ private:
     bool moving = false;
 protected:
     std::vector<Cell*> cells;
+    std::vector<Piece*> pieces;
     std::string **board = new std::string*[8]{
         new std::string[8]{"RW", "NW", "BW", "QW", "KW", "BW", "NW", "RW"},
         new std::string[8]{"PW", "PW", "PW", "PW", "PW", "PW", "PW", "PW"},

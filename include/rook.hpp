@@ -10,7 +10,6 @@ class Rook : public Piece
 public:
     Rook(sf::Vector2f position, sf::Vector2f size, sf::Color color, bool isWhite);
     ~Rook();
-    void draw(sf::RenderWindow& window);
     void move(sf::Vector2f position);
     void move(sf::Vector2f position, sf::Time deltaTime);
     void setTexture(sf::Texture texture);

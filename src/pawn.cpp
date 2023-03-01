@@ -24,12 +24,6 @@ Pawn::~Pawn()
     //dtor
 }
 
-void Pawn::draw(sf::RenderWindow& window)
-{
-    sprite.setPosition(position);
-    sprite.setScale(size.x / sprite.getGlobalBounds().width, size.y / sprite.getGlobalBounds().height);
-    window.draw(sprite);
-}
 
 void Pawn::move(sf::Vector2f position)
 {

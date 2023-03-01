@@ -25,12 +25,6 @@ Rook::~Rook()
     //dtor
 }
 
-void Rook::draw(sf::RenderWindow& window)
-{
-    sprite.setPosition(position);
-    sprite.setScale(size.x / sprite.getGlobalBounds().width, size.y / sprite.getGlobalBounds().height);
-    window.draw(sprite);
-}
 
 void Rook::move(sf::Vector2f position)
 {

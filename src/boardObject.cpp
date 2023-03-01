@@ -16,7 +16,7 @@ BoardObject::~BoardObject()
 
 void BoardObject::draw(sf::RenderWindow& window)
 {
-    window.draw(shape);
+    // window.draw(shape);
 }
 
 void BoardObject::update(sf::Time deltaTime)

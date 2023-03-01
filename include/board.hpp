@@ -12,6 +12,7 @@
 #include "knight.hpp"
 #include "bishop.hpp"
 #include "queen.hpp"
+#include "king.hpp"
 
 class Board : public BoardObject
 {

@@ -153,6 +153,11 @@ void Board::setupBoard()
                 }else if (board[i][j] == "QB"){
                     piece = new Queen(pos, si, sf::Color::Black, false);
                 }
+                else if (board[i][j] == "KW"){
+                    piece = new King(pos, si, sf::Color::White, true);
+                }else if (board[i][j] == "KB"){
+                    piece = new King(pos, si, sf::Color::Black, false);
+                }
                 else{
                     // for now 
                     piece = nullptr;

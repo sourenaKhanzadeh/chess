@@ -8,6 +8,7 @@
 #include "boardObject.hpp"
 #include "cell.hpp"
 #include "pawn.hpp"
+#include "rook.hpp"
 
 class Board : public BoardObject
 {

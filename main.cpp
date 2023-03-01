@@ -8,6 +8,5 @@ int main()
     game.addGameObject(new Board(sf::Vector2f(0, 0), sf::Vector2f(800, 800), sf::Color::Red, true));
     game.run();
 
-
     return 0;
 }

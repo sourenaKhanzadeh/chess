@@ -134,7 +134,13 @@ void Board::setupBoard()
                     piece = new Pawn(pos, si, sf::Color::White, true);
                 }else if (board[i][j] == "PB"){
                     piece = new Pawn(pos, si, sf::Color::Black, false);
-                }else{
+                }
+                else if(board[i][j] == "RW"){
+                    piece = new Rook(pos, si, sf::Color::White, true);
+                }else if(board[i][j] == "RB"){
+                    piece = new Rook(pos, si, sf::Color::Black, false);
+                }
+                else{
                     // for now 
                     piece = nullptr;
                 }

@@ -144,6 +144,10 @@ void Board::setupBoard()
                     piece = new Knight(pos, si, sf::Color::White, true);
                 }else if(board[i][j] == "NB"){
                     piece = new Knight(pos, si, sf::Color::Black, false);
+                }else if (board[i][j] == "BW"){
+                    piece = new Bishop(pos, si, sf::Color::White, true);
+                }else if (board[i][j] == "BB"){
+                    piece = new Bishop(pos, si, sf::Color::Black, false);
                 }
                 else{
                     // for now 

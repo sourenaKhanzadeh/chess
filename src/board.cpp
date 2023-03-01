@@ -166,6 +166,11 @@ void Board::draw(sf::RenderWindow& window)
     for (Piece* piece : pieces)
     {
         piece->draw(window);
+        if(piece->getDestroyed()){
+            pieces.erase(std::remove(pieces.begin(), pieces.end(), piece), pieces.end());
+            piece = nullptr;
+            delete piece;
+        }
     }
 }
 

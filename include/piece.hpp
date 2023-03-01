@@ -41,7 +41,10 @@ public:
     void setWhite(bool isWhite){this->isWhite = isWhite;}
     void setMoveDirectionUp(bool isMoveDirectionUp){this->isMoveDirectionUp = isMoveDirectionUp;}
     bool getWhite(){return isWhite;}
+    void setDestroyed(bool isDestroyed){this->isDestroyed = isDestroyed;}
+    bool getDestroyed(){return isDestroyed;}
 private:
+    bool isDestroyed = false;
 protected:
     sf::Texture texture;
     sf::Sprite sprite;

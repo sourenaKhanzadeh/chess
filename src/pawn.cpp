@@ -32,6 +32,31 @@ void Pawn::move(sf::Vector2f position)
     // round position to nearest 100
     pos.x = round(this->position.x / 100) * 100;
     pos.y = round(this->position.y / 100) * 100;
+    // add normal moves for pawn
+    if(isMoveDirectionUp)
+    {
+        possibleMoves.push_back(sf::Vector2f(this->prevPos.x, this->prevPos.y - 100));
+        possibleMoves.push_back(sf::Vector2f(this->prevPos.x, this->prevPos.y - 200));
+    }
+    else
+    {
+        possibleMoves.push_back(sf::Vector2f(this->prevPos.x, this->prevPos.y + 100));
+        possibleMoves.push_back(sf::Vector2f(this->prevPos.x, this->prevPos.y + 200));
+    }
+    for(Piece* piece : pieces){
+        // check if piece other than self is colliding with pawn
+        if(piece != this){
+            // find out if piece is colliding with pawn in the possible moves
+            for(int i = 0; i < possibleMoves.size(); i++)
+            {
+                if(piece->getPosition() == possibleMoves[i])
+                {
+                    // remove move from possible moves
+                    possibleMoves.erase(possibleMoves.begin() + i);
+                }
+            }
+        }
+    }
     // get current possible moves
     for (Piece* piece : pieces)
     {
@@ -51,40 +76,26 @@ void Pawn::move(sf::Vector2f position)
                 }
             }
         }
-        // add normal moves for pawn
-        if(isMoveDirectionUp)
-        {
-            if (piece->getPosition() != sf::Vector2f(pos.x, pos.y - 100))
-            {
-                possibleMoves.push_back(sf::Vector2f(this->prevPos.x, this->prevPos.y - 100));
-            }
-            if (piece->getPosition() != sf::Vector2f(pos.x, pos.y - 200))
-            {
-                possibleMoves.push_back(sf::Vector2f(this->prevPos.x, this->prevPos.y - 200));
-            }
-        }
-        else
-        {
-            if (piece->getPosition() != sf::Vector2f(pos.x, pos.y + 100))
-            {
-                possibleMoves.push_back(sf::Vector2f(this->prevPos.x, this->prevPos.y + 100));
-            }
-            if (piece->getPosition() != sf::Vector2f(pos.x, pos.y + 200))
-            {
-                possibleMoves.push_back(sf::Vector2f(this->prevPos.x, this->prevPos.y + 200));
-            }
-        }
     }
-    std::cout << "prevPos: " << this->prevPos.x << " " << this->prevPos.y << std::endl;
     for(int i = 0; i < possibleMoves.size(); i++)
     {
-        std::cout << "Possible move: " << possibleMoves[i].x << " " << possibleMoves[i].y << std::endl;
-        std::cout << "Position: " << position.x << " " << position.y << std::endl;   
         // check if size and position match
         if(possibleMoves[i] == position)
         {
             this->position = position;
             this->prevPos = this->position;
+            for (Piece *piece : pieces)
+            {
+                if (piece->getPosition() == position)
+                {
+                    if (piece->getWhite() != this->isWhite)
+                    {
+                        // remove piece from pieces
+                        pieces.erase(std::remove(pieces.begin(), pieces.end(), piece), pieces.end());
+                        piece->setDestroyed(true);
+                    }
+                }
+            }
             return;
         }
     }

@@ -18,8 +18,8 @@ public:
     virtual sf::Vector2f getPosition() = 0;
     virtual sf::Vector2f getSize() = 0;
     virtual sf::Color getColor() = 0;
-    virtual void mousePressed(sf::Event event) = 0;
-    virtual void mouseReleased(sf::Event event) = 0;
+    virtual void mousePressed(sf::Event event, sf::RenderWindow& window) = 0;
+    virtual void mouseReleased(sf::Event event, sf::RenderWindow &window) = 0;
 private:
 protected:
     sf::RectangleShape shape;

@@ -40,15 +40,22 @@ void Game::processEvents()
         {
             for (GameObject* gameObject : renderer->getGameObjects())
             {
-                gameObject->mousePressed(event);
+                gameObject->mousePressed(event, renderer->getWindow());
             }
         }else if (event.type == sf::Event::MouseButtonReleased)
         {
             for (GameObject* gameObject : renderer->getGameObjects())
             {
-                gameObject->mouseReleased(event);
+                gameObject->mouseReleased(event, renderer->getWindow());
+            }
+        }else if (event.type == sf::Event::MouseMoved)
+        {
+            for (GameObject* gameObject : renderer->getGameObjects())
+            {
+                gameObject->mousePressed(event, renderer->getWindow());
             }
         }
+        
     }
 }
 

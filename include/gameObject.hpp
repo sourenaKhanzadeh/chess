@@ -11,8 +11,8 @@ public:
 
     virtual void update(sf::Time deltaTime) = 0;
     virtual void draw(sf::RenderWindow& window) = 0;
-    virtual void mousePressed(sf::Event event) = 0;
-    virtual void mouseReleased(sf::Event event) = 0;
+    virtual void mousePressed(sf::Event event, sf::RenderWindow& window) = 0;
+    virtual void mouseReleased(sf::Event event, sf::RenderWindow& window) = 0;
 
     sf::Vector2f getPosition();
     void setPosition(sf::Vector2f position);

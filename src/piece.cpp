@@ -49,13 +49,38 @@ void Piece::draw(sf::RenderWindow& window)
 
 void Piece::update(sf::Time deltaTime)
 {
+
 }
 
 
-void Piece::mousePressed(sf::Event event)
+void Piece::mousePressed(sf::Event event, sf::RenderWindow& window)
+{
+    // move the piece to the mouse position if dragging is true
+    if (dragging)
+    {
+        // change relative to window
+        sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
+        position = sf::Vector2f(mousePosition.x - size.x / 2, mousePosition.y - size.y / 2);
+    }
+}
+
+void Piece::mouseReleased(sf::Event event, sf::RenderWindow& window)
 {
 }
 
-void Piece::mouseReleased(sf::Event event)
+bool Piece::isMouseInside(sf::Vector2f mousePosition)
 {
+    if (mousePosition.x > position.x && mousePosition.x < position.x + size.x)
+    {
+        if (mousePosition.y > position.y && mousePosition.y < position.y + size.y)
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
+void Piece::setDragging(bool dragging)
+{
+    this->dragging = dragging;
 }

@@ -16,8 +16,8 @@ public:
     void setPosition(sf::Vector2f position);
     void setSize(sf::Vector2f size);
     void setColor(sf::Color color);
-    void mousePressed(sf::Event event);
-    void mouseReleased(sf::Event event);
+    void mousePressed(sf::Event event, sf::RenderWindow& window);
+    void mouseReleased(sf::Event event, sf::RenderWindow& window);
     sf::Vector2f getPosition();
     sf::Vector2f getSize();
     sf::Color getColor();

@@ -157,15 +157,44 @@ void Board::update(sf::Time deltaTime)
 
 
 
-void Board::mousePressed(sf::Event event)
+void Board::mousePressed(sf::Event event, sf::RenderWindow& window)
 {
-    for (Cell* cell : cells)
-    {
-        cell->mousePressed(event);
+    if(event.type == sf::Event::MouseButtonPressed){
+        moving = true;
+        for (Cell* cell : cells)
+        {
+            // check if the mouse is inside the cell
+            if (cell->getPiece() != nullptr){
+                // drag around the piece if the mouse is touching it
+                if (cell->getPiece()->isMouseInside(sf::Vector2f(event.mouseButton.x, event.mouseButton.y)))
+                {
+                    cell->getPiece()->setDragging(true);
+                    cell->getPiece()->mousePressed(event, window);
+                }
+            }
+        }
+    }else if(event.type == sf::Event::MouseMoved){
+        if (moving){
+            for (Cell* cell : cells)
+            {
+                if (cell->getPiece() != nullptr){
+                    cell->getPiece()->mousePressed(event, window);
+                }
+            }
+        }
+    }else{
+        moving = false;
+        for (Cell* cell : cells)
+        {
+            if (cell->getPiece() != nullptr){
+                cell->getPiece()->setDragging(false);
+            }
+        }
     }
 }
 
-void Board::mouseReleased(sf::Event event)
+void Board::mouseReleased(sf::Event event, sf::RenderWindow& window)
 {
+ 
     
 }

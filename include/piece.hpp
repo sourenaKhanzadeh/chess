@@ -18,8 +18,10 @@ public:
     sf::Vector2f getPosition();
     sf::Vector2f getSize();
     sf::Color getColor();
-    void mousePressed(sf::Event event);
-    void mouseReleased(sf::Event event);
+    void mousePressed(sf::Event event, sf::RenderWindow& window);
+    void mouseReleased(sf::Event event, sf::RenderWindow& window);
+    bool isMouseInside(sf::Vector2f mousePosition);
+    void setDragging(bool dragging);
 
     virtual void move(sf::Vector2f position) = 0;
     virtual void move(sf::Vector2f position, sf::Time deltaTime) = 0;
@@ -35,6 +37,8 @@ protected:
     sf::Sprite sprite;
     std::string texturePath;
     bool isWhite;
+    bool dragging = false;
+
 };
 
 #endif

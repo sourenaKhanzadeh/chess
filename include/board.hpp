@@ -21,8 +21,8 @@ public:
     ~Board();
     void draw(sf::RenderWindow& window);
     void update(sf::Time deltaTime);
-    void mousePressed(sf::Event event);
-    void mouseReleased(sf::Event event);
+    void mousePressed(sf::Event event, sf::RenderWindow& window);
+    void mouseReleased(sf::Event event, sf::RenderWindow &window);
     void setPosition(sf::Vector2f position);
     void setSize(sf::Vector2f size);
     void setColor(sf::Color color);
@@ -31,6 +31,7 @@ public:
     sf::Color getColor();
 private:
     bool playAsWhite;
+    bool moving = false;
 protected:
     std::vector<Cell*> cells;
     std::string **board = new std::string*[8]{

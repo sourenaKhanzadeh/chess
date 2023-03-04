@@ -67,7 +67,9 @@ std::string Knight::getTexturePath()
 
 bool Knight::isMoveValid(int x1, int y1, int x2, int y2, std::string **board){
     if((x1 + 2 == x2 && y1 + 1 == y2) || (x1 + 2 == x2 && y1 - 1 == y2) || (x1 - 2 == x2 && y1 + 1 == y2) || (x1 - 2 == x2 && y1 - 1 == y2) || (x1 + 1 == x2 && y1 + 2 == y2) || (x1 + 1 == x2 && y1 - 2 == y2) || (x1 - 1 == x2 && y1 + 2 == y2) || (x1 - 1 == x2 && y1 - 2 == y2)){
-        return true;
+        if (board[y2][x2] == "  " || (board[y2][x2][1] != board[y1][x1][1])){
+            return true;
+        }
     }
     return false;
 }

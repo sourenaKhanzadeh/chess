@@ -28,12 +28,12 @@ Rook::~Rook()
 
 void Rook::move(sf::Vector2f position)
 {
-    this->position = position;
+    // this->position = position;
 }
 
 void Rook::move(sf::Vector2f position, sf::Time deltaTime)
 {
-    this->position = position;
+    // this->position = position;
 }
 
 void Rook::setTexture(sf::Texture texture)
@@ -64,4 +64,9 @@ void Rook::setTexturePath(std::string texturePath)
 std::string Rook::getTexturePath()
 {
     return this->texturePath;
+}
+
+
+bool Rook::isMoveValid(int x1, int y1, int x2, int y2, std::string **board){
+    return true;
 }

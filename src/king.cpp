@@ -26,12 +26,12 @@ King::~King()
 
 void King::move(sf::Vector2f position)
 {
-    this->position = position;
+    // this->position = position;
 }
 
 void King::move(sf::Vector2f position, sf::Time deltaTime)
 {
-    this->position = position;
+    // this->position = position;
 }
 
 void King::setTexture(sf::Texture texture)
@@ -62,4 +62,8 @@ void King::setTexturePath(std::string texturePath)
 std::string King::getTexturePath()
 {
     return texturePath;
+}
+
+bool King::isMoveValid(int x1, int y1, int x2, int y2, std::string **board){
+    return true;
 }

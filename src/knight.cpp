@@ -26,12 +26,12 @@ Knight::~Knight()
 
 void Knight::move(sf::Vector2f position)
 {
-    this->position = position;
+    // this->position = position;
 }
 
 void Knight::move(sf::Vector2f position, sf::Time deltaTime)
 {
-    this->position = position;
+    // this->position = position;
 }
 
 void Knight::setTexture(sf::Texture texture)
@@ -62,4 +62,9 @@ void Knight::setTexturePath(std::string texturePath)
 std::string Knight::getTexturePath()
 {
     return texturePath;
+}
+
+
+bool Knight::isMoveValid(int x1, int y1, int x2, int y2, std::string **board){
+    return true;
 }

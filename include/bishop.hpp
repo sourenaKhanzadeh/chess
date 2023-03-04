@@ -18,6 +18,7 @@ public:
     sf::Sprite getSprite();
     void setTexturePath(std::string texturePath);
     std::string getTexturePath();
+    bool isMoveValid(int x1, int y1, int x2, int y2, std::string **board);
 private:
 };
 

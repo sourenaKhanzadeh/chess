@@ -191,6 +191,7 @@ void Board::mousePressed(sf::Event event, sf::RenderWindow& window)
             {
                 piece->setDragging(true);
                 piece->mousePressed(event, window);
+                currentChosenPiecePosition =  piece->getPosition();
             }
         }
     }else if(event.type == sf::Event::MouseMoved){
@@ -213,7 +214,17 @@ void Board::mouseReleased(sf::Event event, sf::RenderWindow& window)
             {
                 if (cell->isMouseInside(sf::Vector2f(event.mouseButton.x, event.mouseButton.y)))
                 {
-                    piece->move(cell->getPosition());
+                    int x = currentChosenPiecePosition.x / (size.x / 8);
+                    int y = currentChosenPiecePosition.y / (size.y / 8);
+                    int x2 = cell->getPosition().x / (size.x / 8);
+                    int y2 = cell->getPosition().y / (size.y / 8);
+                    if (piece->isMoveValid(x, y, x2, y2, board))
+                    {
+                        movePiece(x, y, x2, y2);
+                        piece->setPosition(cell->getPosition());
+                        piece->setPrevPos(cell->getPosition());
+                        piece->setDragging(false);
+                    }
                 }
             }
         }
@@ -225,4 +236,74 @@ void Board::mouseReleased(sf::Event event, sf::RenderWindow& window)
 std::vector<Cell*> Board::getCells()
 {
     return cells;
+}
+
+void Board::movePiece(int x, int y, int x2, int y2)
+{
+    board[y2][x2] = board[y][x];
+    board[y][x] = "";
+}
+
+void Board::renderBoard()
+{
+    for (Piece* piece : pieces)
+    {
+        // delete piece;
+        piece = nullptr;
+    }
+    pieces.clear();
+    for (int i = 0; i < 8; i++)
+    {
+        for (int j = 0; j < 8; j++)
+        {
+            sf::Vector2f pos(position.x + i * size.x / 8, position.y + j * size.y / 8);
+            sf::Vector2f si(size.x / 8, size.y / 8);
+            if (board[i][j] != "")
+            {
+                Piece* piece;
+                if (board[i][j] == "PW"){
+                    piece = new Pawn(pos, si, sf::Color::White, true);
+                }else if (board[i][j] == "PB"){
+                    piece = new Pawn(pos, si, sf::Color::Black, false);
+                }
+                else if(board[i][j] == "RW"){
+                    piece = new Rook(pos, si, sf::Color::White, true);
+                }else if(board[i][j] == "RB"){
+                    piece = new Rook(pos, si, sf::Color::Black, false);
+                }
+                else if(board[i][j] == "NW"){
+                    piece = new Knight(pos, si, sf::Color::White, true);
+                }else if(board[i][j] == "NB"){
+                    piece = new Knight(pos, si, sf::Color::Black, false);
+                }else if (board[i][j] == "BW"){
+                    piece = new Bishop(pos, si, sf::Color::White, true);
+                }else if (board[i][j] == "BB"){
+                    piece = new Bishop(pos, si, sf::Color::Black, false);
+                }else if (board[i][j] == "QW"){
+                    piece = new Queen(pos, si, sf::Color::White, true);
+                }else if (board[i][j] == "QB"){
+                    piece = new Queen(pos, si, sf::Color::Black, false);
+                }
+                else if (board[i][j] == "KW"){
+                    piece = new King(pos, si, sf::Color::White, true);
+                }else if (board[i][j] == "KB"){
+                    piece = new King(pos, si, sf::Color::Black, false);
+                }
+                else{
+                    // for now 
+                    piece = nullptr;
+                }
+                if (piece != nullptr)
+                {
+                    if (playAsWhite && pos.y > 400 || !playAsWhite && pos.y < 400){
+                        piece->setMoveDirectionUp(true);
+                    }else{
+                        piece->setMoveDirectionUp(false);
+                    }
+                    piece->setPrevPos(pos);
+                    pieces.push_back(piece);
+                }
+            }
+        }
+    }
 }

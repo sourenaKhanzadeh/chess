@@ -26,12 +26,12 @@ Bishop::~Bishop()
 
 void Bishop::move(sf::Vector2f position)
 {
-    this->position = position;
+    // this->position = position;
 }
 
 void Bishop::move(sf::Vector2f position, sf::Time deltaTime)
 {
-    this->position = position;
+    // this->position = position;
 }
 
 void Bishop::setTexture(sf::Texture texture)
@@ -64,3 +64,7 @@ std::string Bishop::getTexturePath()
     return texturePath;
 }
 
+
+bool Bishop::isMoveValid(int x1, int y1, int x2, int y2, std::string **board){
+    return true;
+}

@@ -34,6 +34,9 @@ public:
 private:
     bool playAsWhite;
     bool moving = false;
+    void movePiece(int x, int y, int x2, int y2);
+    void renderBoard();
+    sf::Vector2f currentChosenPiecePosition;
 protected:
     std::vector<Cell*> cells;
     std::vector<Piece*> pieces;

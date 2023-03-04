@@ -36,6 +36,7 @@ public:
     virtual sf::Sprite getSprite() = 0;
     virtual void setTexturePath(std::string texturePath) = 0;
     virtual std::string getTexturePath() = 0;
+    virtual bool isMoveValid(int x1, int y1, int x2, int y2, std::string **board) = 0;
 
     void setPieces(std::vector<Piece*> pieces){this->pieces = pieces;}
     void setWhite(bool isWhite){this->isWhite = isWhite;}

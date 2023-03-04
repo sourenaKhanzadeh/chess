@@ -92,3 +92,8 @@ void Piece::setPrevPos(sf::Vector2f prevPosition)
 {
     this->prevPos = prevPosition;
 }
+
+bool Piece::isDragging()
+{
+    return this->dragging;
+}

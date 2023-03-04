@@ -228,7 +228,7 @@ std::vector<Cell*> Board::getCells()
 
 void Board::movePiece(int x, int y, int x2, int y2)
 {
-    if (board[y2][x2] != "")
+    if (board[y2][x2] != "  ")
     {
         for (Piece* piece : pieces)
         {
@@ -236,10 +236,15 @@ void Board::movePiece(int x, int y, int x2, int y2)
             {
                 piece->setDestroyed(true);
             }
+            //en passant
+            // if (piece->getPosition() == sf::Vector2f(x2 * 100, y * 100) && board[y][x][1] != board[y2][x2][1] && board[y][x][0] == 'P' && board[y2][x2][0] == 'P')
+            // {
+            //     piece->setDestroyed(true);
+            // }
         }
     }
     board[y2][x2] = board[y][x];
-    board[y][x] = "";
+    board[y][x] = "  ";
 
 }
 

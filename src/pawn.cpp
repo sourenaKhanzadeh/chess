@@ -144,40 +144,92 @@ bool Pawn::isMoveValid(int x1, int y1, int x2, int y2, std::string **board){
     if(isMoveDirectionUp){
         if(y1 == 6){
             if(y2 == 4 && x1 == x2){
-                if(board[y2][x2] == ""){
+                if(board[y2][x2] == "  "){
                     return true;
                 }
             }
         }
         if(y2 == y1 - 1 && x1 == x2){
-            if(board[y2][x2] == ""){
+            if(board[y2][x2] == "  "){
                 return true;
             }
         }
         if(y2 == y1 - 1 && (x2 == x1 + 1 || x2 == x1 - 1)){
-            if(board[y2][x2] != ""){
-                return true;
+            if(board[y2][x2] != "  "){
+                if(isWhite){
+                    if(board[y2][x2][1] == 'B'){
+                        return true;
+                    }
+                }
+                else{
+                    if(board[y2][x2][1] == 'W'){
+                        return true;
+                    }
+                }
             }
         }
+        // en passant move
+        // if(y2 == y1 - 1 && (x2 == x1 + 1 || x2 == x1 - 1)){
+        //     if(board[y2][x2] == "  "){
+        //         if(board[y2][x2] != "  "){
+        //             if(isWhite){
+        //                 if(board[y2][x2][1] == 'B'){
+        //                     return true;
+        //                 }
+        //             }
+        //             else{
+        //                 if(board[y2][x2][1] == 'W'){
+        //                     return true;
+        //                 }
+        //             }
+        //         }
+        //     }
+        // }
     }
     else{
         if(y1 == 1){
             if(y2 == 3 && x1 == x2){
-                if(board[y2][x2] == ""){
+                if(board[y2][x2] == "  "){
                     return true;
                 }
             }
         }
         if(y2 == y1 + 1 && x1 == x2){
-            if(board[y2][x2] == ""){
+            if(board[y2][x2] == "  "){
                 return true;
             }
         }
         if(y2 == y1 + 1 && (x2 == x1 + 1 || x2 == x1 - 1)){
-            if(board[y2][x2] != ""){
-                return true;
+            if(board[y2][x2] != "  "){
+                if(isWhite){
+                    if(board[y2][x2][1] == 'B'){
+                        return true;
+                    }
+                }
+                else{
+                    if(board[y2][x2][1] == 'W'){
+                        return true;
+                    }
+                }
             }
         }
+        // en passant move
+        // if(y2 == y1 + 1 && (x2 == x1 + 1 || x2 == x1 - 1)){
+        //     if(board[y2][x2] == "  "){
+        //         if(board[y2][x2] != "  "){
+        //             if(isWhite){
+        //                 if(board[y2][x2][1] == 'B'){
+        //                     return true;
+        //                 }
+        //             }
+        //             else{
+        //                 if(board[y2][x2][1] == 'W'){
+        //                     return true;
+        //                 }
+        //             }
+        //         }
+        //     }
+        // }
     }
     return false;
 }

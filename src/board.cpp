@@ -7,29 +7,8 @@ Board::Board(sf::Vector2f position, sf::Vector2f size, sf::Color color, bool pla
     {
         cells.push_back(new Cell(sf::Vector2f(0, 0), sf::Vector2f(0, 0), sf::Color::White));
     }
-    // rotate 'board' 90 degrees to make it easier to read
-    for (int i = 0; i < 8; i++)
-    {
-        for (int j = 0; j < i; j++)
-        {
-            std::string temp = board[i][j];
-            board[i][j] = board[j][i];
-            board[j][i] = temp;
-        }
-    }
-    if (playAsWhite)
-    {
-        // rotate 'board' 180 degrees
-        for (int i = 0; i < 8; i++)
-        {
-            for (int j = 0; j < 4; j++)
-            {
-                std::string temp = board[i][j];
-                board[i][j] = board[i][7 - j];
-                board[i][7 - j] = temp;
-            }
-        }
-    }
+    
+    
     for (int i = 0; i < 8; i++)
     {
         for (int j = 0; j < 8; j++)
@@ -43,7 +22,7 @@ Board::Board(sf::Vector2f position, sf::Vector2f size, sf::Color color, bool pla
             {
                 cells[i * 8 + j]->setColor(sf::Color(209, 139, 71));
             }
-            sf::Vector2f pos(position.x + i * size.x / 8, position.y + j * size.y / 8);
+            sf::Vector2f pos(position.x + j * size.x / 8, position.y + i * size.y / 8);
             sf::Vector2f si(size.x / 8, size.y / 8);
             cells[i * 8 + j]->setPosition(pos);
             cells[i * 8 + j]->setSize(si);
@@ -102,32 +81,10 @@ Board::Board(sf::Vector2f position, sf::Vector2f size, sf::Color color, bool pla
         piece->setPieces(pieces);
     }
 
-    // make board to its original position
-    if (playAsWhite)
-    {
-        for (int i = 0; i < 8; i++)
-        {
-            for (int j = 0; j < i; j++)
-            {
-                std::string temp = board[i][j];
-                board[i][j] = board[j][i];
-                board[j][i] = temp;
-            }
-        }
-    }
-    else
-    {
-        for (int i = 0; i < 8; i++)
-        {
-            for (int j = 0; j < 4; j++)
-            {
-                std::string temp = board[i][j];
-                board[i][j] = board[i][7 - j];
-                board[i][7 - j] = temp;
-            }
-        }
-    }
+    
+    
 
+    
 }
 
 Board::~Board()
@@ -249,6 +206,7 @@ void Board::mouseReleased(sf::Event event, sf::RenderWindow& window)
                     if (piece->isMoveValid(x, y, x2, y2, board))
                     {
                         movePiece(x, y, x2, y2);
+                        std::cout << *this << std::endl;
                         piece->setPosition(cell->getPosition());
                         piece->setPrevPos(cell->getPosition());
                         piece->setDragging(false);
@@ -271,8 +229,19 @@ std::vector<Cell*> Board::getCells()
 
 void Board::movePiece(int x, int y, int x2, int y2)
 {
+    if (board[y2][x2] != "")
+    {
+        for (Piece* piece : pieces)
+        {
+            if (piece->getPosition() == sf::Vector2f(x2 * 100, y2 * 100) && board[y][x][1] != board[y2][x2][1])
+            {
+                piece->setDestroyed(true);
+            }
+        }
+    }
     board[y2][x2] = board[y][x];
     board[y][x] = "";
+
 }
 
 void Board::renderBoard()

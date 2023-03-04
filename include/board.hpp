@@ -31,6 +31,15 @@ public:
     sf::Vector2f getSize();
     sf::Color getColor();
     std::vector<Cell*> getCells();
+    friend std::ostream& operator<<(std::ostream& os, const Board& board){
+        for(int i = 0; i < 8; i++){
+            for(int j = 0; j < 8; j++){
+                os << board.board[i][j] << " ";
+            }
+            os << std::endl;
+        }
+        return os;
+    }
 private:
     bool playAsWhite;
     bool moving = false;

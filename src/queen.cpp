@@ -67,5 +67,71 @@ std::string Queen::getTexturePath()
 
 
 bool Queen::isMoveValid(int x1, int y1, int x2, int y2, std::string **board){
-    return true;
+    if(x1 == x2 && y1 == y2)
+        return false;
+
+    // eat a piece
+    if(board[y2][x2] != "  "){
+        if(isWhite){
+            if(board[y2][x2][1] == 'B')
+                return true;
+        }else{
+            if(board[y2][x2][1] == 'W')
+                return true;
+        }
+        return false;
+    }
+    if(x1 == x2){
+        if(y1 < y2){
+            for(int i = y1 + 1; i < y2; i++){
+                if(board[i][x1] != "  ")
+                    return false;
+            }
+        }else{
+            for(int i = y1 - 1; i > y2; i--){
+                if(board[i][x1] != "  ")
+                    return false;
+            }
+        }
+        return true;
+    }
+    if(y1 == y2){
+        if(x1 < x2){
+            for(int i = x1 + 1; i < x2; i++){
+                if(board[y1][i] != "  ")
+                    return false;
+            }
+        }else{
+            for(int i = x1 - 1; i > x2; i--){
+                if(board[y1][i] != "  ")
+                    return false;
+            }
+        }
+        return true;
+    }
+    if(abs(x1 - x2) == abs(y1 - y2)){
+        if(x1 < x2 && y1 < y2){
+            for(int i = 1; i < abs(x1 - x2); i++){
+                if(board[y1 + i][x1 + i] != "  ")
+                    return false;
+            }
+        }else if(x1 > x2 && y1 > y2){
+            for(int i = 1; i < abs(x1 - x2); i++){
+                if(board[y1 - i][x1 - i] != "  ")
+                    return false;
+            }
+        }else if(x1 < x2 && y1 > y2){
+            for(int i = 1; i < abs(x1 - x2); i++){
+                if(board[y1 - i][x1 + i] != "  ")
+                    return false;
+            }
+        }else if(x1 > x2 && y1 < y2){
+            for(int i = 1; i < abs(x1 - x2); i++){
+                if(board[y1 + i][x1 - i] != "  ")
+                    return false;
+            }
+        }
+        return true;
+    }
+    return false;
 }

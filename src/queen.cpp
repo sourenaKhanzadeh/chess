@@ -70,17 +70,6 @@ bool Queen::isMoveValid(int x1, int y1, int x2, int y2, std::string **board){
     if(x1 == x2 && y1 == y2)
         return false;
 
-    // eat a piece
-    if(board[y2][x2] != "  "){
-        if(isWhite){
-            if(board[y2][x2][1] == 'B')
-                return true;
-        }else{
-            if(board[y2][x2][1] == 'W')
-                return true;
-        }
-        return false;
-    }
     if(x1 == x2){
         if(y1 < y2){
             for(int i = y1 + 1; i < y2; i++){

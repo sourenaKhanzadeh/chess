@@ -65,5 +65,40 @@ std::string King::getTexturePath()
 }
 
 bool King::isMoveValid(int x1, int y1, int x2, int y2, std::string **board){
-    return true;
+    if(x1 == x2 && y1 == y2)
+        return false;
+    // make a vacinity for the king
+    if(x2 == x1 + 1 && y2 == y1 + 1){
+        if (board[y2][x2] == "  " || board[y2][x2][1] != board[y1][x1][1])
+            return true;
+    }
+    if(x2 == x1 + 1 && y2 == y1 - 1){
+        if (board[y2][x2] == "  " || board[y2][x2][1] != board[y1][x1][1])
+            return true;
+    }
+    if(x2 == x1 - 1 && y2 == y1 + 1){
+        if (board[y2][x2] == "  " || board[y2][x2][1] != board[y1][x1][1])
+            return true;
+    }
+    if(x2 == x1 - 1 && y2 == y1 - 1){
+        if (board[y2][x2] == "  " || board[y2][x2][1] != board[y1][x1][1])
+            return true;
+    }
+    if(x2 == x1 + 1 && y2 == y1){
+        if (board[y2][x2] == "  " || board[y2][x2][1] != board[y1][x1][1])
+            return true;
+    }
+    if(x2 == x1 - 1 && y2 == y1){
+        if (board[y2][x2] == "  " || board[y2][x2][1] != board[y1][x1][1])
+            return true;
+    }
+    if(x2 == x1 && y2 == y1 + 1){
+        if (board[y2][x2] == "  " || board[y2][x2][1] != board[y1][x1][1])
+            return true;
+    }
+    if(x2 == x1 && y2 == y1 - 1){
+        if (board[y2][x2] == "  " || board[y2][x2][1] != board[y1][x1][1])
+            return true;
+    }
+    return false;
 }

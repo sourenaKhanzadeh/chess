@@ -140,5 +140,44 @@ std::string Pawn::getTexturePath()
 
 
 bool Pawn::isMoveValid(int x1, int y1, int x2, int y2, std::string **board){
-    return true;
+    if(isMoveDirectionUp){
+        if(y1 == 6){
+            if(y2 == 4 && x1 == x2){
+                if(board[y2][x2] == ""){
+                    return true;
+                }
+            }
+        }
+        if(y2 == y1 - 1 && x1 == x2){
+            std::cout << "Board: " << board[y2][x2] << std::endl;
+            if(board[y2][x2] == ""){
+                return true;
+            }
+        }
+        if(y2 == y1 - 1 && (x2 == x1 + 1 || x2 == x1 - 1)){
+            if(board[y2][x2] != ""){
+                return true;
+            }
+        }
+    }
+    else{
+        if(y1 == 1){
+            if(y2 == 3 && x1 == x2){
+                if(board[y2][x2] == ""){
+                    return true;
+                }
+            }
+        }
+        if(y2 == y1 + 1 && x1 == x2){
+            if(board[y2][x2] == ""){
+                return true;
+            }
+        }
+        if(y2 == y1 + 1 && (x2 == x1 + 1 || x2 == x1 - 1)){
+            if(board[y2][x2] != ""){
+                return true;
+            }
+        }
+    }
+    return false;
 }

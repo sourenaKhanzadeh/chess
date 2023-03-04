@@ -27,6 +27,7 @@ public:
     bool isMouseInside(sf::Vector2f mousePosition);
     void setDragging(bool dragging);
     void setPrevPos(sf::Vector2f prevPos);
+    sf::Vector2f getPrevPos(){return prevPos;}
 
     virtual void move(sf::Vector2f position) = 0;
     virtual void move(sf::Vector2f position, sf::Time deltaTime) = 0;

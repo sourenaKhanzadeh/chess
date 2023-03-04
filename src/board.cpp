@@ -102,6 +102,32 @@ Board::Board(sf::Vector2f position, sf::Vector2f size, sf::Color color, bool pla
         piece->setPieces(pieces);
     }
 
+    // make board to its original position
+    if (playAsWhite)
+    {
+        for (int i = 0; i < 8; i++)
+        {
+            for (int j = 0; j < i; j++)
+            {
+                std::string temp = board[i][j];
+                board[i][j] = board[j][i];
+                board[j][i] = temp;
+            }
+        }
+    }
+    else
+    {
+        for (int i = 0; i < 8; i++)
+        {
+            for (int j = 0; j < 4; j++)
+            {
+                std::string temp = board[i][j];
+                board[i][j] = board[i][7 - j];
+                board[i][7 - j] = temp;
+            }
+        }
+    }
+
 }
 
 Board::~Board()
@@ -214,15 +240,20 @@ void Board::mouseReleased(sf::Event event, sf::RenderWindow& window)
             {
                 if (cell->isMouseInside(sf::Vector2f(event.mouseButton.x, event.mouseButton.y)))
                 {
-                    int x = currentChosenPiecePosition.x / (size.x / 8);
-                    int y = currentChosenPiecePosition.y / (size.y / 8);
-                    int x2 = cell->getPosition().x / (size.x / 8);
-                    int y2 = cell->getPosition().y / (size.y / 8);
+                    // convert the position of the piece to the position of the cell to grid coordinates
+                    int x = (piece->getPrevPos().x) / 100;
+                    int y = (piece->getPrevPos().y) / 100;
+                    int x2 = (cell->getPosition().x) / 100;
+                    int y2 = (cell->getPosition().y) / 100;
+                    std::cout << "x: " << x << " y: " << y << " x2: " << x2 << " y2: " << y2 << std::endl;
                     if (piece->isMoveValid(x, y, x2, y2, board))
                     {
                         movePiece(x, y, x2, y2);
                         piece->setPosition(cell->getPosition());
                         piece->setPrevPos(cell->getPosition());
+                        piece->setDragging(false);
+                    }else{
+                        piece->setPosition(piece->getPrevPos());
                         piece->setDragging(false);
                     }
                 }

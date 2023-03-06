@@ -46,6 +46,7 @@ private:
     void movePiece(int x, int y, int x2, int y2);
     sf::Vector2f currentChosenPiecePosition;
     Piece* getPieceFromBoard(int x, int y);
+    bool whiteTurn = true;
 protected:
     std::vector<Cell*> cells;
     std::vector<Piece*> pieces;

@@ -2,6 +2,7 @@
 
 Pawn::Pawn(sf::Vector2f position, sf::Vector2f size, sf::Color color, bool isWhite): Piece(position, size, color)
 {
+    type = "Pawn";
     this->isWhite = isWhite;
     if(isWhite)
     {

@@ -48,6 +48,7 @@ public:
     bool getDestroyed(){return isDestroyed;}
 
     bool firstMove = true;
+    std::string getType(){return type;}
 private:
     bool isDestroyed = false;
 protected:
@@ -60,6 +61,7 @@ protected:
     std::vector<sf::Vector2f> possibleMoves;
     bool isMoveDirectionUp;
     std::vector<Piece*> pieces;
+    std::string type;
 };
 
 #endif

@@ -100,5 +100,55 @@ bool King::isMoveValid(int x1, int y1, int x2, int y2, std::string **board){
         if (board[y2][x2] == "  " || board[y2][x2][1] != board[y1][x1][1])
             return true;
     }
+
+    // Castling
+    if(firstMove){
+
+        if(isMoveDirectionUp && isWhite){
+            if(x1 == 4 && y1 == 0 && x2 == 6 && y2 == 0){
+                if(board[0][5] == "  " && board[0][6] == "  "){
+                    return true;
+                }
+            }
+            if(x1 == 4 && y1 == 0 && x2 == 2 && y2 == 0){
+                if(board[0][1] == "  " && board[0][2] == "  " && board[0][3] == "  "){
+                    return true;
+                }
+            }
+        }else if (!isMoveDirectionUp && !isWhite){
+            if(x1 == 4 && y1 == 7 && x2 == 6 && y2 == 7){
+                if(board[7][5] == "  " && board[7][6] == "  "){
+                    return true;
+                }
+            }
+            if(x1 == 4 && y1 == 7 && x2 == 2 && y2 == 7){
+                if(board[7][1] == "  " && board[7][2] == "  " && board[7][3] == "  "){
+                    return true;
+                }
+            }
+        }else if(isMoveDirectionUp && !isWhite){
+            if(x1 == 4 && y1 == 7 && x2 == 6 && y2 == 7){
+                if(board[7][5] == "  " && board[7][6] == "  "){
+                    return true;
+                }
+            }
+            if(x1 == 4 && y1 == 7 && x2 == 2 && y2 == 7){
+                if(board[7][1] == "  " && board[7][2] == "  " && board[7][3] == "  "){
+                    return true;
+                }
+            }
+        }else if(!isMoveDirectionUp && isWhite){
+            if(x1 == 4 && y1 == 0 && x2 == 6 && y2 == 0){
+                if(board[0][5] == "  " && board[0][6] == "  "){
+                    return true;
+                }
+            }
+            if(x1 == 4 && y1 == 0 && x2 == 2 && y2 == 0){
+                if(board[0][1] == "  " && board[0][2] == "  " && board[0][3] == "  "){
+                    return true;
+                }
+            }
+        }
+    }
     return false;
 }

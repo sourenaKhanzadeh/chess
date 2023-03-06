@@ -204,6 +204,7 @@ void Board::mouseReleased(sf::Event event, sf::RenderWindow& window)
                     std::cout << "x: " << x << " y: " << y << " x2: " << x2 << " y2: " << y2 << std::endl;
                     if (piece->isMoveValid(x, y, x2, y2, board))
                     {
+                        piece->firstMove = false;
                         movePiece(x, y, x2, y2);
                         std::cout << *this << std::endl;
                         piece->setPosition(cell->getPosition());
@@ -243,71 +244,49 @@ void Board::movePiece(int x, int y, int x2, int y2)
             // }
         }
     }
+    // castling
+    if (board[y][x] == "KW" && x2 == 6 && y2 == 0)
+    {
+        Piece * rooke = getPieceFromBoard(7, 0);
+        rooke->setPosition(sf::Vector2f(5 * 100, 0));
+        rooke->setPrevPos(sf::Vector2f(5 * 100, 0));
+        board[0][5] = "RW";
+        board[0][7] = "  ";
+    }else if (board[y][x] == "KW" && x2 == 2 && y2 == 0)
+    {
+        Piece * rooke = getPieceFromBoard(0, 0);
+        rooke->setPosition(sf::Vector2f(3 * 100, 0));
+        rooke->setPrevPos(sf::Vector2f(3 * 100, 0));
+        board[0][3] = "RW";
+        board[0][0] = "  ";
+    }else if (board[y][x] == "KB" && x2 == 6 && y2 == 7)
+    {
+        Piece * rooke = getPieceFromBoard(7, 7);
+        rooke->setPosition(sf::Vector2f(5 * 100, 7 * 100));
+        rooke->setPrevPos(sf::Vector2f(5 * 100, 7 * 100));
+        board[7][5] = "RB";
+        board[7][7] = "  ";
+    }else if (board[y][x] == "KB" && x2 == 2 && y2 == 7)
+    {
+        Piece * rooke = getPieceFromBoard(0, 7);
+        rooke->setPosition(sf::Vector2f(3 * 100, 7 * 100));
+        rooke->setPrevPos(sf::Vector2f(3 * 100, 7 * 100));
+        board[7][3] = "RB";
+        board[7][0] = "  ";
+    }
     board[y2][x2] = board[y][x];
     board[y][x] = "  ";
 
 }
 
-void Board::renderBoard()
+Piece* Board::getPieceFromBoard(int x, int y)
 {
     for (Piece* piece : pieces)
     {
-        // delete piece;
-        piece = nullptr;
-    }
-    pieces.clear();
-    for (int i = 0; i < 8; i++)
-    {
-        for (int j = 0; j < 8; j++)
+        if (piece->getPosition() == sf::Vector2f(x * 100, y * 100))
         {
-            sf::Vector2f pos(position.x + i * size.x / 8, position.y + j * size.y / 8);
-            sf::Vector2f si(size.x / 8, size.y / 8);
-            if (board[i][j] != "")
-            {
-                Piece* piece;
-                if (board[i][j] == "PW"){
-                    piece = new Pawn(pos, si, sf::Color::White, true);
-                }else if (board[i][j] == "PB"){
-                    piece = new Pawn(pos, si, sf::Color::Black, false);
-                }
-                else if(board[i][j] == "RW"){
-                    piece = new Rook(pos, si, sf::Color::White, true);
-                }else if(board[i][j] == "RB"){
-                    piece = new Rook(pos, si, sf::Color::Black, false);
-                }
-                else if(board[i][j] == "NW"){
-                    piece = new Knight(pos, si, sf::Color::White, true);
-                }else if(board[i][j] == "NB"){
-                    piece = new Knight(pos, si, sf::Color::Black, false);
-                }else if (board[i][j] == "BW"){
-                    piece = new Bishop(pos, si, sf::Color::White, true);
-                }else if (board[i][j] == "BB"){
-                    piece = new Bishop(pos, si, sf::Color::Black, false);
-                }else if (board[i][j] == "QW"){
-                    piece = new Queen(pos, si, sf::Color::White, true);
-                }else if (board[i][j] == "QB"){
-                    piece = new Queen(pos, si, sf::Color::Black, false);
-                }
-                else if (board[i][j] == "KW"){
-                    piece = new King(pos, si, sf::Color::White, true);
-                }else if (board[i][j] == "KB"){
-                    piece = new King(pos, si, sf::Color::Black, false);
-                }
-                else{
-                    // for now 
-                    piece = nullptr;
-                }
-                if (piece != nullptr)
-                {
-                    if (playAsWhite && pos.y > 400 || !playAsWhite && pos.y < 400){
-                        piece->setMoveDirectionUp(true);
-                    }else{
-                        piece->setMoveDirectionUp(false);
-                    }
-                    piece->setPrevPos(pos);
-                    pieces.push_back(piece);
-                }
-            }
+            return piece;
         }
     }
+    return nullptr;
 }

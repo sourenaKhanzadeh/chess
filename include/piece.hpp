@@ -46,6 +46,8 @@ public:
     bool getWhite(){return isWhite;}
     void setDestroyed(bool isDestroyed){this->isDestroyed = isDestroyed;}
     bool getDestroyed(){return isDestroyed;}
+
+    bool firstMove = true;
 private:
     bool isDestroyed = false;
 protected:

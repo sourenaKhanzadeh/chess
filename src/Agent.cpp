@@ -86,7 +86,109 @@ std::vector<std::pair<int, int>> MoveGeneration::pawnMoves(std::string **board, 
 std::vector<std::pair<int, int>> MoveGeneration::rookMoves(std::string **board, Piece *piece) {
     std::vector<std::pair<int, int>> moves;
     // make move for rook
-
+    if (piece->getWhite()) {
+        int x = piece->getPrevPos().x / 100;
+        int y = piece->getPrevPos().y / 100;
+        int i = 1;
+        while (x + i <= 7) {
+            if (board[y][x + i] == "  ") {
+                moves.emplace_back(x + i, y);
+                i++;
+            } else if (board[y][x + i][1] == 'B') {
+                moves.emplace_back(x + i, y);
+                break;
+            } else {
+                break;
+            }
+        }
+        i = 1;
+        while (x - i >= 0) {
+            if (board[y][x - i] == "  ") {
+                moves.emplace_back(x - i, y);
+                i++;
+            } else if (board[y][x - i][1] == 'B') {
+                moves.emplace_back(x - i, y);
+                break;
+            } else {
+                break;
+            }
+        }
+        i = 1;
+        while (y + i <= 7) {
+            if (board[y + i][x] == "  ") {
+                moves.emplace_back(x, y + i);
+                i++;
+            } else if (board[y + i][x][1] == 'B') {
+                moves.emplace_back(x, y + i);
+                break;
+            } else {
+                break;
+            }
+        }
+        i = 1;
+        while (y - i >= 0) {
+            if (board[y - i][x] == "  ") {
+                moves.emplace_back(x, y - i);
+                i++;
+            } else if (board[y - i][x][1] == 'B') {
+                moves.emplace_back(x, y - i);
+                break;
+            } else {
+                break;
+            }
+        }
+    } else {
+        int x = piece->getPrevPos().x / 100;
+        int y = piece->getPrevPos().y / 100;
+        int i = 1;
+        while (x + i <= 7) {
+            if (board[y][x + i] == "  ") {
+                moves.emplace_back(x + i, y);
+                i++;
+            } else if (board[y][x + i][1] == 'W') {
+                moves.emplace_back(x + i, y);
+                break;
+            } else {
+                break;
+            }
+        }
+        i = 1;
+        while (x - i >= 0) {
+            if (board[y][x - i] == "  ") {
+                moves.emplace_back(x - i, y);
+                i++;
+            } else if (board[y][x - i][1] == 'W') {
+                moves.emplace_back(x - i, y);
+                break;
+            } else {
+                break;
+            }
+        }
+        i = 1;
+        while (y + i <= 7) {
+            if (board[y + i][x] == "  ") {
+                moves.emplace_back(x, y + i);
+                i++;
+            } else if (board[y + i][x][1] == 'W') {
+                moves.emplace_back(x, y + i);
+                break;
+            } else {
+                break;
+            }
+        }
+        i = 1;
+        while (y - i >= 0) {
+            if (board[y - i][x] == "  ") {
+                moves.emplace_back(x, y - i);
+                i++;
+            } else if (board[y - i][x][1] == 'W') {
+                moves.emplace_back(x, y - i);
+                break;
+            } else {
+                break;
+            }
+        }
+    }
     return moves;
 }
 

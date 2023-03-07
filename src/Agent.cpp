@@ -376,6 +376,90 @@ std::vector<std::pair<int, int>> MoveGeneration::queenMoves(std::string **board,
 
 std::vector<std::pair<int, int>> MoveGeneration::kingMoves(std::string **board, Piece *piece) {
     std::vector<std::pair<int, int>> moves;
+    // make move for king
+    if (piece->getWhite()) {
+        int x = piece->getPrevPos().x / 100;
+        int y = piece->getPrevPos().y / 100;
+        // can eat piece if not the same color
+        if (x + 1 <= 7 && y + 1 <= 7 && board[y + 1][x + 1][1] != 'W') {
+            moves.emplace_back(x + 1, y + 1);
+        }
+        if (x - 1 >= 0 && y + 1 <= 7 && board[y + 1][x - 1][1] != 'W') {
+            moves.emplace_back(x - 1, y + 1);
+        }
+        if (x + 1 <= 7 && y - 1 >= 0 && board[y - 1][x + 1][1] != 'W') {
+            moves.emplace_back(x + 1, y - 1);
+        }
+        if (x - 1 >= 0 && y - 1 >= 0 && board[y - 1][x - 1][1] != 'W') {
+            moves.emplace_back(x - 1, y - 1);
+        }
+        if (x + 1 <= 7 && board[y][x + 1][1] != 'W') {
+            moves.emplace_back(x + 1, y);
+        }
+        if (x - 1 >= 0 && board[y][x - 1][1] != 'W') {
+            moves.emplace_back(x - 1, y);
+        }
+        if (y + 1 <= 7 && board[y + 1][x][1] != 'W') {
+            moves.emplace_back(x, y + 1);
+        }
+        if (y - 1 >= 0 && board[y - 1][x][1] != 'W') {
+            moves.emplace_back(x, y - 1);
+        }
+        // can move toc cell if its empty
+        if (x + 1 <= 7 && y + 1 <= 7 && board[y + 1][x + 1] == "  ") {
+            moves.emplace_back(x + 1, y + 1);
+        }
+        if (x - 1 >= 0 && y + 1 <= 7 && board[y + 1][x - 1] == "  ") {
+            moves.emplace_back(x - 1, y + 1);
+        }
+        if (x + 1 <= 7 && y - 1 >= 0 && board[y - 1][x + 1] == "  ") {
+            moves.emplace_back(x + 1, y - 1);
+        }
+        if (x - 1 >= 0 && y - 1 >= 0 && board[y - 1][x - 1] == "  ") {
+            moves.emplace_back(x - 1, y - 1);
+        }
+        if (x + 1 <= 7 && board[y][x + 1] == "  ") {
+            moves.emplace_back(x + 1, y);
+        }
+        if (x - 1 >= 0 && board[y][x - 1] == "  ") {
+            moves.emplace_back(x - 1, y);
+        }
+        if (y + 1 <= 7 && board[y + 1][x] == "  ") {
+            moves.emplace_back(x, y + 1);
+        }
+        if (y - 1 >= 0 && board[y - 1][x] == "  ") {
+            moves.emplace_back(x, y - 1);
+        }
+
+    } else {
+        int x = piece->getPrevPos().x / 100;
+        int y = piece->getPrevPos().y / 100;
+        // can eat piece if not the same color
+        if (x + 1 <= 7 && y + 1 <= 7 && board[y + 1][x + 1][1] != 'B') {
+            moves.emplace_back(x + 1, y + 1);
+        }
+        if (x - 1 >= 0 && y + 1 <= 7 && board[y + 1][x - 1][1] != 'B') {
+            moves.emplace_back(x - 1, y + 1);
+        }
+        if (x + 1 <= 7 && y - 1 >= 0 && board[y - 1][x + 1][1] != 'B') {
+            moves.emplace_back(x + 1, y - 1);
+        }
+        if (x - 1 >= 0 && y - 1 >= 0 && board[y - 1][x - 1][1] != 'B') {
+            moves.emplace_back(x - 1, y - 1);
+        }
+        if (x + 1 <= 7 && board[y][x + 1][1] != 'B') {
+            moves.emplace_back(x + 1, y);
+        }
+        if (x - 1 >= 0 && board[y][x - 1][1] != 'B') {
+            moves.emplace_back(x - 1, y);
+        }
+        if (y + 1 <= 7 && board[y + 1][x][1] != 'B') {
+            moves.emplace_back(x, y + 1);
+        }
+        if (y - 1 >= 0 && board[y - 1][x][1] != 'B') {
+            moves.emplace_back(x, y - 1);
+        }
+    }
     return moves;
 }
 

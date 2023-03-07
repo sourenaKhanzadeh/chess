@@ -46,6 +46,7 @@ public:
     bool getWhite(){return isWhite;}
     void setDestroyed(bool isDestroyed){this->isDestroyed = isDestroyed;}
     bool getDestroyed(){return isDestroyed;}
+    bool getMoveDirectionUp(){return isMoveDirectionUp;}
 
     bool firstMove = true;
     std::string getType(){return type;}

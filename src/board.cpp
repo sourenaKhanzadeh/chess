@@ -201,6 +201,11 @@ void Board::mouseReleased(sf::Event event, sf::RenderWindow& window)
                     int y = (piece->getPrevPos().y) / 100;
                     int x2 = (cell->getPosition().x) / 100;
                     int y2 = (cell->getPosition().y) / 100;
+                    std::vector<std::string> res = MoveGeneration::generateMoves(board, piece);
+                    for (const std::string& s : res)
+                    {
+                        std::cout << s << std::endl;
+                    }
                     std::cout << "x: " << x << " y: " << y << " x2: " << x2 << " y2: " << y2 << std::endl;
                     if (piece->isMoveValid(x, y, x2, y2, board))
                     {

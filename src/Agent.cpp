@@ -256,6 +256,110 @@ std::vector<std::pair<int, int>> MoveGeneration::knightMoves(std::string **board
 
 std::vector<std::pair<int, int>> MoveGeneration::bishopMoves(std::string **board, Piece *piece) {
     std::vector<std::pair<int, int>> moves;
+    // make move for bishop
+    if (piece->getWhite()) {
+        int x = piece->getPrevPos().x / 100;
+        int y = piece->getPrevPos().y / 100;
+        int i = 1;
+        while (x + i <= 7 && y + i <= 7) {
+            if (board[y + i][x + i] == "  ") {
+                moves.emplace_back(x + i, y + i);
+                i++;
+            } else if (board[y + i][x + i][1] == 'B') {
+                moves.emplace_back(x + i, y + i);
+                break;
+            } else {
+                break;
+            }
+        }
+        i = 1;
+        while (x - i >= 0 && y + i <= 7) {
+            if (board[y + i][x - i] == "  ") {
+                moves.emplace_back(x - i, y + i);
+                i++;
+            } else if (board[y + i][x - i][1] == 'B') {
+                moves.emplace_back(x - i, y + i);
+                break;
+            } else {
+                break;
+            }
+        }
+        i = 1;
+        while (x + i <= 7 && y - i >= 0) {
+            if (board[y - i][x + i] == "  ") {
+                moves.emplace_back(x + i, y - i);
+                i++;
+            } else if (board[y - i][x + i][1] == 'B') {
+                moves.emplace_back(x + i, y - i);
+                break;
+            } else {
+                break;
+            }
+        }
+        i = 1;
+        while (x - i >= 0 && y - i >= 0) {
+            if (board[y - i][x - i] == "  ") {
+                moves.emplace_back(x - i, y - i);
+                i++;
+            } else if (board[y - i][x - i][1] == 'B') {
+                moves.emplace_back(x - i, y - i);
+                break;
+            } else {
+                break;
+            }
+        }
+    } else {
+        int x = piece->getPrevPos().x / 100;
+        int y = piece->getPrevPos().y / 100;
+        int i = 1;
+        while (x + i <= 7 && y + i <= 7) {
+            if (board[y + i][x + i] == "  ") {
+                moves.emplace_back(x + i, y + i);
+                i++;
+            } else if (board[y + i][x + i][1] == 'W') {
+                moves.emplace_back(x + i, y + i);
+                break;
+            } else {
+                break;
+            }
+        }
+        i = 1;
+        while (x - i >= 0 && y + i <= 7) {
+            if (board[y + i][x - i] == "  ") {
+                moves.emplace_back(x - i, y + i);
+                i++;
+            } else if (board[y + i][x - i][1] == 'W') {
+                moves.emplace_back(x - i, y + i);
+                break;
+            } else {
+                break;
+            }
+        }
+        i = 1;
+        while (x + i <= 7 && y - i >= 0) {
+            if (board[y - i][x + i] == "  ") {
+                moves.emplace_back(x + i, y - i);
+                i++;
+            } else if (board[y - i][x + i][1] == 'W') {
+                moves.emplace_back(x + i, y - i);
+                break;
+            } else {
+                break;
+            }
+        }
+        i = 1;
+        while (x - i >= 0 && y - i >= 0) {
+            if (board[y - i][x - i] == "  ") {
+                moves.emplace_back(x - i, y - i);
+                i++;
+            } else if (board[y - i][x - i][1] == 'W') {
+                moves.emplace_back(x - i, y - i);
+                break;
+            } else {
+                break;
+            }
+        }
+    }
     return moves;
 }
 

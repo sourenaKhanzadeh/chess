@@ -365,6 +365,12 @@ std::vector<std::pair<int, int>> MoveGeneration::bishopMoves(std::string **board
 
 std::vector<std::pair<int, int>> MoveGeneration::queenMoves(std::string **board, Piece *piece) {
     std::vector<std::pair<int, int>> moves;
+    // make move for queen
+    // just append the moves of rook and bishop
+    std::vector<std::pair<int, int>> rookMoves = MoveGeneration::rookMoves(board, piece);
+    std::vector<std::pair<int, int>> bishopMoves = MoveGeneration::bishopMoves(board, piece);
+    moves.insert(moves.end(), rookMoves.begin(), rookMoves.end());
+    moves.insert(moves.end(), bishopMoves.begin(), bishopMoves.end());
     return moves;
 }
 

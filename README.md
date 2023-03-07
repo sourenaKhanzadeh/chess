@@ -32,20 +32,20 @@ cd build
 - [x] Add pieces
 - [x] Add movement
 - [x] Add capturing
-- [] Add check
-- [] Add checkmate
-- [] Add stalemate
+- [ ] Add check
+- [ ] Add checkmate
+- [ ] Add stalemate
 - [x] Add castling
 - [x] Add en passant
-- [] Add pawn promotion
-- [] Add AI
-- [] Add AI difficulty levels
-- [] Add AI move evaluation
-- [] Add AI move suggestions
-- [] Add AI move hints
-- [] Add AI move history
-- [] Add AI move undo
-- [] Add different AI algorithms
+- [ ] Add pawn promotion
+- [ ] Add AI
+- [ ] Add AI difficulty levels
+- [ ] Add AI move evaluation
+- [ ] Add AI move suggestions
+- [ ] Add AI move hints
+- [ ] Add AI move history
+- [ ] Add AI move undo
+- [ ] Add different AI algorithms
 
 ## Author
 ## Sourena Khanzadeh

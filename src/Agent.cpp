@@ -194,6 +194,63 @@ std::vector<std::pair<int, int>> MoveGeneration::rookMoves(std::string **board, 
 
 std::vector<std::pair<int, int>> MoveGeneration::knightMoves(std::string **board, Piece *piece) {
     std::vector<std::pair<int, int>> moves;
+    // make move for knight
+    if (piece->getWhite()) {
+        int x = piece->getPrevPos().x / 100;
+        int y = piece->getPrevPos().y / 100;
+        if (x + 2 <= 7 && y + 1 <= 7 && board[y + 1][x + 2][1] != 'W') {
+            moves.emplace_back(x + 2, y + 1);
+        }
+        if (x + 2 <= 7 && y - 1 >= 0 && board[y - 1][x + 2][1] != 'W') {
+            moves.emplace_back(x + 2, y - 1);
+        }
+        if (x - 2 >= 0 && y + 1 <= 7 && board[y + 1][x - 2][1] != 'W') {
+            moves.emplace_back(x - 2, y + 1);
+        }
+        if (x - 2 >= 0 && y - 1 >= 0 && board[y - 1][x - 2][1] != 'W') {
+            moves.emplace_back(x - 2, y - 1);
+        }
+        if (x + 1 <= 7 && y + 2 <= 7 && board[y + 2][x + 1][1] != 'W') {
+            moves.emplace_back(x + 1, y + 2);
+        }
+        if (x + 1 <= 7 && y - 2 >= 0 && board[y - 2][x + 1][1] != 'W') {
+            moves.emplace_back(x + 1, y - 2);
+        }
+        if (x - 1 >= 0 && y + 2 <= 7 && board[y + 2][x - 1][1] != 'W') {
+            moves.emplace_back(x - 1, y + 2);
+        }
+        if (x - 1 >= 0 && y - 2 >= 0 && board[y - 2][x - 1][1] != 'W') {
+            moves.emplace_back(x - 1, y - 2);
+        }
+    } else {
+        int x = piece->getPrevPos().x / 100;
+        int y = piece->getPrevPos().y / 100;
+        if (x + 2 <= 7 && y + 1 <= 7 && board[y + 1][x + 2][1] != 'B') {
+            moves.emplace_back(x + 2, y + 1);
+        }
+        if (x + 2 <= 7 && y - 1 >= 0 && board[y - 1][x + 2][1] != 'B') {
+            moves.emplace_back(x + 2, y - 1);
+        }
+        if (x - 2 >= 0 && y + 1 <= 7 && board[y + 1][x - 2][1] != 'B') {
+            moves.emplace_back(x - 2, y + 1);
+        }
+        if (x - 2 >= 0 && y - 1 >= 0 && board[y - 1][x - 2][1] != 'B') {
+            moves.emplace_back(x - 2, y - 1);
+        }
+        if (x + 1 <= 7 && y + 2 <= 7 && board[y + 2][x + 1][1] != 'B') {
+            moves.emplace_back(x + 1, y + 2);
+        }
+        if (x + 1 <= 7 && y - 2 >= 0 && board[y - 2][x + 1][1] != 'B') {
+            moves.emplace_back(x + 1, y - 2);
+        }
+        if (x - 1 >= 0 && y + 2 <= 7 && board[y + 2][x - 1][1] != 'B') {
+            moves.emplace_back(x - 1, y + 2);
+        }
+        if (x - 1 >= 0 && y - 2 >= 0 && board[y - 2][x - 1][1] != 'B') {
+            moves.emplace_back(x - 1, y - 2);
+        }
+    }
+
     return moves;
 }
 

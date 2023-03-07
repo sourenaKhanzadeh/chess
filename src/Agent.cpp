@@ -37,60 +37,47 @@ std::vector<std::pair<int, int>> MoveGeneration::pawnMoves(std::string **board, 
     std::vector<std::pair<int, int>> moves;
     int x = piece->getPrevPos().x / 100;
     int y = piece->getPrevPos().y / 100;
+    // check for the condition if pawn next move is out of the board
     if(piece->getWhite() && piece->getMoveDirectionUp()){
-        if(board[x][y-1] == "  "){
+        if(y-1 >= 0 && board[y-1][x] == "  "){
             moves.emplace_back(x, y-1);
-            if(board[x][y-2] == "  " && piece->firstMove){
+            if(y-2 >= 0 && board[y-2][x] == "  " && piece->firstMove){
                 moves.emplace_back(x, y-2);
             }
         }
-        if(x-1 >= 0 && board[x-1][y-1] != "  " && board[x-1][y-1][1] == 'B'){
+        if(x-1 >= 0 && y-1 >= 0 && board[y-1][x-1] != "  " && board[y-1][x-1][1] == 'B'){
             moves.emplace_back(x-1, y-1);
         }
-        if(x+1 <= 7 && board[x+1][y-1] != "  " && board[x+1][y-1][1] == 'B'){
+        if(x+1 <= 7 && y-1 >= 0 && board[y-1][x+1] != "  " && board[y-1][x+1][1] == 'B'){
             moves.emplace_back(x+1, y-1);
         }
     }
     else if(piece->getWhite() && !piece->getMoveDirectionUp()){
-        if(board[x][y+1] == "  "){
+        if(y+1 <= 7 && board[y+1][x] == "  "){
             moves.emplace_back(x, y+1);
-            if(board[x][y+2] == "  " && piece->firstMove){
+            if(y+2 <= 7 && board[y+2][x] == "  " && piece->firstMove){
                 moves.emplace_back(x, y+2);
             }
         }
-        if(x-1 >= 0 && board[x-1][y+1] != "  " && board[x-1][y+1][1] == 'B'){
+        if(x-1 >= 0 && y+1 <= 7 && board[y+1][x-1] != "  " && board[y+1][x-1][1] == 'B'){
             moves.emplace_back(x-1, y+1);
         }
-        if(x+1 <= 7 && board[x+1][y+1] != "  " && board[x+1][y+1][1] == 'B'){
+        if(x+1 <= 7 && y+1 <= 7 && board[y+1][x+1] != "  " && board[y+1][x+1][1] == 'B'){
             moves.emplace_back(x+1, y+1);
         }
     }
     else if(!piece->getWhite() && piece->getMoveDirectionUp()){
-        if(board[x][y-1] == "  "){
+        if(y-1 >= 0 && board[y-1][x] == "  "){
             moves.emplace_back(x, y-1);
-            if(board[x][y-2] == "  " && piece->firstMove){
+            if(y-2 >= 0 && board[y-2][x] == "  " && piece->firstMove){
                 moves.emplace_back(x, y-2);
             }
         }
-        if(x-1 >= 0 && board[x-1][y-1] != "  " && board[x-1][y-1][1] == 'W'){
+        if(x-1 >= 0 && y-1 >= 0 && board[y-1][x-1] != "  " && board[y-1][x-1][1] == 'W'){
             moves.emplace_back(x-1, y-1);
         }
-        if(x+1 <= 7 && board[x+1][y-1] != "  " && board[x+1][y-1][1] == 'W'){
+        if(x+1 <= 7 && y-1 >= 0 && board[y-1][x+1] != "  " && board[y-1][x+1][1] == 'W'){
             moves.emplace_back(x+1, y-1);
-        }
-    }
-    else if(!piece->getWhite() && !piece->getMoveDirectionUp()){
-        if(board[x][y+1] == "  "){
-            moves.emplace_back(x, y+1);
-            if(board[x][y+2] == "  " && piece->firstMove){
-                moves.emplace_back(x, y+2);
-            }
-        }
-        if(x-1 >= 0 && board[x-1][y+1] != "  " && board[x-1][y+1][1] == 'W'){
-            moves.emplace_back(x-1, y+1);
-        }
-        if(x+1 <= 7 && board[x+1][y+1] != "  " && board[x+1][y+1][1] == 'W'){
-            moves.emplace_back(x+1, y+1);
         }
     }
     return moves;

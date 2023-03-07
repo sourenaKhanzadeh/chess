@@ -175,6 +175,14 @@ void Board::mousePressed(sf::Event event, sf::RenderWindow& window)
                 piece->setDragging(true);
                 piece->mousePressed(event, window);
                 currentChosenPiecePosition =  piece->getPosition();
+                std::vector<std::pair<int, int>> possibleMoves = MoveGeneration::generateMoves(board, piece);
+                for (Cell* cell : cells)
+                {
+                    if(std::find(possibleMoves.begin(), possibleMoves.end(), std::make_pair((int)cell->getPosition().x / 100, (int)cell->getPosition().y / 100)) != possibleMoves.end())
+                    {
+                        cell->setPossibleMove(true);
+                    }
+                }
             }
         }
     }else if(event.type == sf::Event::MouseMoved){
@@ -201,10 +209,10 @@ void Board::mouseReleased(sf::Event event, sf::RenderWindow& window)
                     int y = (piece->getPrevPos().y) / 100;
                     int x2 = (cell->getPosition().x) / 100;
                     int y2 = (cell->getPosition().y) / 100;
-                    std::vector<std::string> res = MoveGeneration::generateMoves(board, piece);
-                    for (const std::string& s : res)
+                    std::vector<std::pair<int, int>> res = MoveGeneration::generateMoves(board, piece);
+                    for (const std::pair<int, int>& p : res)
                     {
-                        std::cout << s << std::endl;
+                        std::cout << p.first << ", " << p.second << std::endl;
                     }
                     std::cout << "x: " << x << " y: " << y << " x2: " << x2 << " y2: " << y2 << std::endl;
                     if (piece->isMoveValid(x, y, x2, y2, board))
@@ -220,6 +228,7 @@ void Board::mouseReleased(sf::Event event, sf::RenderWindow& window)
                         piece->setDragging(false);
                     }
                 }
+                cell->setPossibleMove(false);
             }
         }
     }

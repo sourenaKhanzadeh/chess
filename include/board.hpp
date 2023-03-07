@@ -5,6 +5,7 @@
 #include <vector>
 #include <string>
 #include <iostream>
+#include <utility>
 #include "boardObject.hpp"
 #include "piece.hpp"
 #include "cell.hpp"

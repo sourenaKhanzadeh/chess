@@ -8,7 +8,7 @@ MoveGeneration::MoveGeneration() = default;
 
 MoveGeneration::~MoveGeneration() = default;
 
-std::vector<std::string> MoveGeneration::generateMoves(std::string **board, Piece *piece, bool check, bool stalemate) {
+std::vector<std::pair<int, int>> MoveGeneration::generateMoves(std::string **board, Piece *piece, bool check, bool stalemate) {
     if(piece->getType() == "Pawn"){
         return pawnMoves(board, piece);
     }
@@ -33,93 +33,93 @@ std::vector<std::string> MoveGeneration::generateMoves(std::string **board, Piec
     }
 }
 
-std::vector<std::string> MoveGeneration::pawnMoves(std::string **board, Piece *piece) {
-    std::vector<std::string> moves;
+std::vector<std::pair<int, int>> MoveGeneration::pawnMoves(std::string **board, Piece *piece) {
+    std::vector<std::pair<int, int>> moves;
     int x = piece->getPrevPos().x / 100;
     int y = piece->getPrevPos().y / 100;
     if(piece->getWhite() && piece->getMoveDirectionUp()){
         if(board[x][y-1] == "  "){
-            moves.push_back(std::to_string(x) + std::to_string(y-1));
+            moves.emplace_back(x, y-1);
             if(board[x][y-2] == "  " && piece->firstMove){
-                moves.push_back(std::to_string(x) + std::to_string(y-2));
+                moves.emplace_back(x, y-2);
             }
         }
         if(x-1 >= 0 && board[x-1][y-1] != "  " && board[x-1][y-1][1] == 'B'){
-            moves.push_back(std::to_string(x-1) + std::to_string(y-1));
+            moves.emplace_back(x-1, y-1);
         }
         if(x+1 <= 7 && board[x+1][y-1] != "  " && board[x+1][y-1][1] == 'B'){
-            moves.push_back(std::to_string(x+1) + std::to_string(y-1));
+            moves.emplace_back(x+1, y-1);
         }
     }
     else if(piece->getWhite() && !piece->getMoveDirectionUp()){
         if(board[x][y+1] == "  "){
-            moves.push_back(std::to_string(x) + ", " + std::to_string(y+1));
+            moves.emplace_back(x, y+1);
             if(board[x][y+2] == "  " && piece->firstMove){
-                moves.push_back(std::to_string(x) + ", " + std::to_string(y+2));
+                moves.emplace_back(x, y+2);
             }
         }
         if(x-1 >= 0 && board[x-1][y+1] != "  " && board[x-1][y+1][1] == 'B'){
-            moves.push_back(std::to_string(x-1) + ", " + std::to_string(y+1));
+            moves.emplace_back(x-1, y+1);
         }
         if(x+1 <= 7 && board[x+1][y+1] != "  " && board[x+1][y+1][1] == 'B'){
-            moves.push_back(std::to_string(x+1) + ", " + std::to_string(y+1));
+            moves.emplace_back(x+1, y+1);
         }
     }
     else if(!piece->getWhite() && piece->getMoveDirectionUp()){
         if(board[x][y-1] == "  "){
-            moves.push_back(std::to_string(x) + ", " + std::to_string(y-1));
+            moves.emplace_back(x, y-1);
             if(board[x][y-2] == "  " && piece->firstMove){
-                moves.push_back(std::to_string(x) + ", " + std::to_string(y-2));
+                moves.emplace_back(x, y-2);
             }
         }
         if(x-1 >= 0 && board[x-1][y-1] != "  " && board[x-1][y-1][1] == 'W'){
-            moves.push_back(std::to_string(x-1) + ", " + std::to_string(y-1));
+            moves.emplace_back(x-1, y-1);
         }
         if(x+1 <= 7 && board[x+1][y-1] != "  " && board[x+1][y-1][1] == 'W'){
-            moves.push_back(std::to_string(x+1) + ", " + std::to_string(y-1));
+            moves.emplace_back(x+1, y-1);
         }
     }
     else if(!piece->getWhite() && !piece->getMoveDirectionUp()){
         if(board[x][y+1] == "  "){
-            moves.push_back(std::to_string(x) + ", " + std::to_string(y+1));
+            moves.emplace_back(x, y+1);
             if(board[x][y+2] == "  " && piece->firstMove){
-                moves.push_back(std::to_string(x) + ", " + std::to_string(y+2));
+                moves.emplace_back(x, y+2);
             }
         }
         if(x-1 >= 0 && board[x-1][y+1] != "  " && board[x-1][y+1][1] == 'W'){
-            moves.push_back(std::to_string(x-1) + ", " + std::to_string(y+1));
+            moves.emplace_back(x-1, y+1);
         }
         if(x+1 <= 7 && board[x+1][y+1] != "  " && board[x+1][y+1][1] == 'W'){
-            moves.push_back(std::to_string(x+1) + ", " + std::to_string(y+1));
+            moves.emplace_back(x+1, y+1);
         }
     }
     return moves;
 }
 
-std::vector<std::string> MoveGeneration::rookMoves(std::string **board, Piece *piece) {
-    std::vector<std::string> moves;
+std::vector<std::pair<int, int>> MoveGeneration::rookMoves(std::string **board, Piece *piece) {
+    std::vector<std::pair<int, int>> moves;
     // make move for rook
 
     return moves;
 }
 
-std::vector<std::string> MoveGeneration::knightMoves(std::string **board, Piece *piece) {
-    std::vector<std::string> moves;
+std::vector<std::pair<int, int>> MoveGeneration::knightMoves(std::string **board, Piece *piece) {
+    std::vector<std::pair<int, int>> moves;
     return moves;
 }
 
-std::vector<std::string> MoveGeneration::bishopMoves(std::string **board, Piece *piece) {
-    std::vector<std::string> moves;
+std::vector<std::pair<int, int>> MoveGeneration::bishopMoves(std::string **board, Piece *piece) {
+    std::vector<std::pair<int, int>> moves;
     return moves;
 }
 
-std::vector<std::string> MoveGeneration::queenMoves(std::string **board, Piece *piece) {
-    std::vector<std::string> moves;
+std::vector<std::pair<int, int>> MoveGeneration::queenMoves(std::string **board, Piece *piece) {
+    std::vector<std::pair<int, int>> moves;
     return moves;
 }
 
-std::vector<std::string> MoveGeneration::kingMoves(std::string **board, Piece *piece) {
-    std::vector<std::string> moves;
+std::vector<std::pair<int, int>> MoveGeneration::kingMoves(std::string **board, Piece *piece) {
+    std::vector<std::pair<int, int>> moves;
     return moves;
 }
 

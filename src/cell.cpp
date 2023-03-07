@@ -48,6 +48,13 @@ void Cell::draw(sf::RenderWindow& window)
     shape.setSize(size);
     shape.setFillColor(color);
     window.draw(shape);
+    if(possibleMove){
+        sf::RectangleShape possibleMoveShape;
+        possibleMoveShape.setPosition(position);
+        possibleMoveShape.setSize(size);
+        possibleMoveShape.setFillColor(sf::Color(0, 0, 0, 50));
+        window.draw(possibleMoveShape);
+    }
 }
 
 void Cell::update(sf::Time deltaTime)
@@ -70,4 +77,9 @@ bool Cell::isMouseInside(sf::Vector2f mousePosition)
         return true;
     }
     return false;
+}
+
+void Cell::setPossibleMove(bool possibleMove)
+{
+    this->possibleMove = possibleMove;
 }

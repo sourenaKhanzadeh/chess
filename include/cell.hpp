@@ -22,8 +22,10 @@ public:
     sf::Vector2f getPosition();
     sf::Vector2f getSize();
     sf::Color getColor();
+    void setPossibleMove(bool possibleMove);
 private:
 protected:
+    bool possibleMove = false;
 };
 
 #endif
